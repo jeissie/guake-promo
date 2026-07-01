@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>价目表</title>
+<style>
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #fff;
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .poster {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 20mm 18mm;
+    background: #fff;
+    margin: 0 auto;
+    color: #1a1a2e;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* 标题区 */
+  .header {
+    text-align: center;
+    padding-bottom: 12mm;
+    border-bottom: 2px solid #0a6efd;
+    margin-bottom: 10mm;
+  }
+
+  .header h1 {
+    font-size: 30pt;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: #0a6efd;
+  }
+
+  .header .subtitle {
+    font-size: 11pt;
+    color: #888;
+    margin-top: 4mm;
+    letter-spacing: 2px;
+  }
+
+  .header .stats {
+    display: flex;
+    justify-content: center;
+    gap: 18mm;
+    margin-top: 6mm;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat .num {
+    font-size: 20pt;
+    font-weight: 900;
+    color: #0a6efd;
+    line-height: 1;
+  }
+
+  .stat .label {
+    font-size: 8pt;
+    color: #888;
+    margin-top: 1mm;
+  }
+
+  /* 价目区 */
+  .pricing-section {
+    margin-bottom: 8mm;
+  }
+
+  .pricing-section h2 {
+    font-size: 13pt;
+    color: #0a6efd;
+    font-weight: 700;
+    margin-bottom: 6mm;
+    padding-left: 3mm;
+    border-left: 3px solid #0a6efd;
+    letter-spacing: 1px;
+  }
+
+  .cards {
+    display: flex;
+    gap: 5mm;
+  }
+
+  .card {
+    flex: 1;
+    border: 1.5px solid #e4e9ff;
+    border-radius: 6px;
+    padding: 6mm 5mm;
+    text-align: center;
+    background: #f7f9ff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #0a6efd;
+  }
+
+  .card.recommended::before {
+    height: 4px;
+    background: linear-gradient(90deg, #0a6efd, #4d8fff);
+  }
+
+  .card .icon {
+    font-size: 26pt;
+    line-height: 1;
+    margin-bottom: 3mm;
+  }
+
+  .card .site-name {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 2mm;
+    line-height: 1.3;
+  }
+
+  .card .desc {
+    font-size: 7pt;
+    color: #888;
+    line-height: 1.5;
+    margin-bottom: 4mm;
+    min-height: 22mm;
+  }
+
+  .card .price {
+    font-size: 22pt;
+    font-weight: 900;
+    color: #0a6efd;
+    line-height: 1;
+  }
+
+  .card .price .yuan {
+    font-size: 12pt;
+    font-weight: 400;
+  }
+
+  .card .price .unit {
+    font-size: 7pt;
+    color: #888;
+    font-weight: 400;
+    margin-top: 1mm;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 7pt;
+    color: #0a6efd;
+    border: 1px solid #0a6efd;
+    border-radius: 20px;
+    padding: 1px 5px;
+    margin-top: 3mm;
+    letter-spacing: 0.5px;
+  }
+
+  .card.recommended .badge {
+    background: #0a6efd;
+    color: #fff;
+  }
+
+  /* 优惠横幅 */
+  .discount-banner {
+    background: linear-gradient(135deg, #0a6efd, #2d8fff);
+    color: #fff;
+    text-align: center;
+    padding: 6mm 8mm;
+    border-radius: 6px;
+    margin-bottom: 8mm;
+  }
+
+  .discount-banner .big {
+    font-size: 26pt;
+    font-weight: 900;
+    letter-spacing: 2px;
+  }
+
+  .discount-banner .small {
+    font-size: 8pt;
+    opacity: 0.85;
+    margin-top: 1mm;
+    letter-spacing: 0.5px;
+  }
+
+  /* 流程 */
+  .flow-section {
+    margin-bottom: 8mm;
+  }
+
+  .flow-section h2 {
+    font-size: 13pt;
+    color: #0a6efd;
+    font-weight: 700;
+    margin-bottom: 5mm;
+    padding-left: 3mm;
+    border-left: 3px solid #0a6efd;
+    letter-spacing: 1px;
+  }
+
+  .steps {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    padding: 0 2mm;
+  }
+
+  .steps::before {
+    content: '';
+    position: absolute;
+    top: 14mm;
+    left: 14mm;
+    right: 14mm;
+    height: 1.5px;
+    background: linear-gradient(90deg, #0a6efd 0%, #d0e2ff 100%);
+    z-index: 0;
+  }
+
+  .step {
+    text-align: center;
+    flex: 1;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step .step-icon {
+    width: 10mm;
+    height: 10mm;
+    background: #0a6efd;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2.5mm;
+    font-size: 13pt;
+    font-weight: 700;
+  }
+
+  .step .step-title {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 1mm;
+  }
+
+  .step .step-desc {
+    font-size: 7pt;
+    color: #888;
+    line-height: 1.4;
+  }
+
+  /* 承诺 */
+  .promise-section {
+    margin-bottom: 8mm;
+  }
+
+  .promise-section h2 {
+    font-size: 13pt;
+    color: #0a6efd;
+    font-weight: 700;
+    margin-bottom: 4mm;
+    padding-left: 3mm;
+    border-left: 3px solid #0a6efd;
+    letter-spacing: 1px;
+  }
+
+  .promises {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3mm 8mm;
+  }
+
+  .promise {
+    display: flex;
+    align-items: center;
+    gap: 3mm;
+    font-size: 8.5pt;
+    color: #333;
+  }
+
+  .promise .p-icon {
+    width: 6mm;
+    height: 6mm;
+    background: #e8f0ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9pt;
+    flex-shrink: 0;
+    color: #0a6efd;
+  }
+
+  .promise .p-text strong {
+    color: #1a1a2e;
+  }
+
+  /* 联系 */
+  .contact {
+    border-top: 1px solid #e8e8e8;
+    padding-top: 5mm;
+    text-align: center;
+  }
+
+  .contact .contact-title {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 3mm;
+  }
+
+  .contact .contact-sub {
+    font-size: 8pt;
+    color: #888;
+    margin-bottom: 4mm;
+    line-height: 1.5;
+  }
+
+  .qr-placeholder {
+    width: 30mm;
+    height: 30mm;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+    margin: 0 auto 3mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 7pt;
+    color: #aaa;
+    gap: 2mm;
+  }
+
+  .qr-placeholder .icon {
+    font-size: 18pt;
+  }
+
+  .contact .wechat-note {
+    font-size: 7.5pt;
+    color: #0a6efd;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* 底部 */
+  .footer {
+    text-align: center;
+    margin-top: 5mm;
+    font-size: 7pt;
+    color: #bbb;
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+<div class="poster">
+
+  <!-- 标题 -->
+  <div class="header">
+    <h1>专业挂课 · 安全高效</h1>
+    <div class="subtitle">一站式学习服务平台 · 覆盖三大主流学习平台</div>
+    <div class="stats">
+      <div class="stat"><div class="num">3</div><div class="label">大服务网站</div></div>
+      <div class="stat"><div class="num">2周</div><div class="label">完成时效</div></div>
+      <div class="stat"><div class="num">100%</div><div class="label">通过率</div></div>
+    </div>
+  </div>
+
+  <!-- 价目 -->
+  <div class="pricing-section">
+    <h2>📋 服务价目</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">🏥</div>
+        <div class="site-name">华医网</div>
+        <div class="desc">涵盖临床、护理、公卫等多学科课程，轻松完成继续教育学分</div>
+        <div class="price"><span class="yuan">¥</span>25<span class="unit">/人</span></div>
+        <div class="badge">热门推荐</div>
+      </div>
+      <div class="card recommended">
+        <div class="icon">📖</div>
+        <div class="site-name">陕西继续教育<br>学习平台</div>
+        <div class="desc">满足年度继续教育学时要求</div>
+        <div class="price"><span class="yuan">¥</span>15<span class="unit">/人</span></div>
+        <div class="badge">性价比高</div>
+      </div>
+      <div class="card">
+        <div class="icon">☢️</div>
+        <div class="site-name">放射工作人员<br>考试网</div>
+        <div class="desc">助力顺利通过放射工作人员资质认证考试</div>
+        <div class="price"><span class="yuan">¥</span>50<span class="unit">/人</span></div>
+        <div class="badge">含考试服务</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 优惠 -->
+  <div class="discount-banner">
+    <div class="big">🎉 3人成团 · 8折优惠</div>
+    <div class="small">三人以上团购立享优惠，拼团更划算</div>
+  </div>
+
+  <!-- 流程 -->
+  <div class="flow-section">
+    <h2>📌 服务流程</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-icon">💬</div>
+        <div class="step-title">咨询客服</div>
+        <div class="step-desc">扫码添加微信<br>说明需求</div>
+      </div>
+      <div class="step">
+        <div class="step-icon">📋</div>
+        <div class="step-title">确认需求</div>
+        <div class="step-desc">选择网站<br>和套餐</div>
+      </div>
+      <div class="step">
+        <div class="step-icon">⚙️</div>
+        <div class="step-title">开始服务</div>
+        <div class="step-desc">听课 + 考试<br>全程代学代考</div>
+      </div>
+      <div class="step">
+        <div class="step-icon">✅</div>
+        <div class="step-title">完成交付</div>
+        <div class="step-desc">通知确认<br>结果无忧</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 承诺 -->
+  <div class="promise-section">
+    <h2>🛡️ 服务承诺</h2>
+    <div class="promises">
+      <div class="promise"><div class="p-icon">✅</div><div><strong>全程代学代考</strong><br>省心省力</div></div>
+      <div class="promise"><div class="p-icon">🏆</div><div><strong>包通过</strong><br>不通过全额退款</div></div>
+      <div class="promise"><div class="p-icon">💬</div><div><strong>全程跟进</strong><br>进度实时反馈</div></div>
+      <div class="promise"><div class="p-icon">💰</div><div><strong>售后保障</strong><br>不满意可退款</div></div>
+      <div class="promise"><div class="p-icon">⏱️</div><div><strong>2周内完成</strong><br>超时自动退款</div></div>
+      <div class="promise"><div class="p-icon">🔒</div><div><strong>信息安全</strong><br>账户密码严格保密</div></div>
+    </div>
+  </div>
+
+  <!-- 联系 -->
+  <div class="contact">
+    <div class="contact-title">💬 联系我们</div>
+    <div class="contact-sub">扫码添加微信客服，专业客服一对一服务<br>7×24小时在线，随时解答您的疑问</div>
+    <div class="qr-placeholder">
+      <div class="icon">📱</div>
+      <div>长按识别二维码</div>
+      <div>添加微信客服</div>
+    </div>
+    <div class="wechat-note">专业托管 · 安全高效 · 值得信赖</div>
+  </div>
+
+  <div class="footer">© 2026 一站式学习服务平台</div>
+
+</div>
+</body>
+</html>
