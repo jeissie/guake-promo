@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>专业托管 · 安全高效</title>
+    <title>AI 学习助手 · 考试轻松通过</title>
     <style>
         * {
             margin: 0;
@@ -68,18 +68,18 @@
         }
 
         .banner h1 {
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
             position: relative;
             z-index: 1;
         }
 
         .banner .tagline {
-            font-size: 15px;
+            font-size: 14px;
             color: rgba(255,255,255,0.85);
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             position: relative;
             z-index: 1;
         }
@@ -194,7 +194,7 @@
             display: flex;
             align-items: center;
             gap: 14px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .service-card .card-icon {
@@ -224,93 +224,35 @@
             color: #1a3a5c;
         }
 
-        .service-card .card-desc {
-            font-size: 13px;
-            color: #666;
-            margin-bottom: 15px;
+        .service-card .card-problem {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
             line-height: 1.7;
         }
 
-        .service-card .card-bottom {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .service-card .card-price {
-            display: flex;
-            align-items: baseline;
-            gap: 4px;
-        }
-
-        .service-card .price-amount {
-            font-size: 30px;
-            font-weight: 800;
+        .service-card .card-solution {
+            font-size: 14px;
             color: #0d4f8c;
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-weight: 500;
         }
 
-        .service-card .price-unit {
-            font-size: 13px;
-            color: #999;
+        .service-card .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
         }
 
-        .service-card .card-tag {
+        .service-card .tag {
             font-size: 11px;
             padding: 4px 10px;
             border-radius: 20px;
             background: #e8f4fd;
             color: #0d4f8c;
             font-weight: 500;
-        }
-
-        /* 团购优惠 */
-        .group-discount {
-            background: linear-gradient(135deg, #0d4f8c, #1a8cff, #4db8ff);
-            color: #fff;
-            border-radius: 20px;
-            padding: 28px 20px;
-            text-align: center;
-            margin: 5px 20px 0;
-            box-shadow: 0 6px 25px rgba(13,79,140,0.25);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .group-discount::before {
-            content: '';
-            position: absolute;
-            top: -30px;
-            right: -30px;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-        }
-
-        .group-discount::after {
-            content: '';
-            position: absolute;
-            bottom: -20px;
-            left: -20px;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.08);
-        }
-
-        .group-discount .discount-badge {
-            font-size: 40px;
-            font-weight: 900;
-            margin-bottom: 6px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .group-discount .discount-desc {
-            font-size: 14px;
-            color: rgba(255,255,255,0.9);
-            position: relative;
-            z-index: 1;
         }
 
         /* 流程图 */
@@ -411,42 +353,68 @@
             color: #999;
         }
 
-        /* 服务时效 */
-        .timeline-box {
-            background: linear-gradient(135deg, #0d4f8c, #1a6fcc);
+        /* 功能介绍 */
+        .intro-box {
+            background: #fff;
             border-radius: 20px;
-            padding: 30px 25px;
-            text-align: center;
-            color: #fff;
-            position: relative;
-            overflow: hidden;
+            padding: 28px 20px;
+            margin: 0 20px 0;
+            box-shadow: 0 4px 20px rgba(13,79,140,0.07);
+            border: 1px solid rgba(13,79,140,0.07);
         }
 
-        .timeline-box::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.08);
-        }
-
-        .timeline-box .timeline-icon {
-            font-size: 44px;
-            margin-bottom: 10px;
-        }
-
-        .timeline-box .timeline-text {
-            font-size: 22px;
+        .intro-box .intro-title {
+            font-size: 16px;
             font-weight: 700;
+            color: #0d4f8c;
+            text-align: center;
+            margin-bottom: 18px;
         }
 
-        .timeline-box .timeline-sub {
-            font-size: 13px;
-            color: rgba(255,255,255,0.8);
-            margin-top: 8px;
+        .intro-box .intro-headline {
+            font-size: 15px;
+            color: #444;
+            margin-bottom: 14px;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .intro-box .intro-list {
+            list-style: none;
+        }
+
+        .intro-box .intro-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .intro-box .intro-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .intro-box .intro-list .bullet {
+            color: #0d4f8c;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .intro-box .intro-footer {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 15px;
+            color: #1a3a5c;
+            font-weight: 500;
+        }
+
+        .intro-box .intro-footer .arrow {
+            color: #0d4f8c;
+            font-weight: 700;
         }
 
         /* 微信客服区域 */
@@ -577,8 +545,8 @@
 
     <!-- 顶部 Banner -->
     <div class="banner">
-        <h1>🚀 专业托管 · 安全高效</h1>
-        <p class="tagline">一站式学习服务平台</p>
+        <h1>🚀 AI 学习助手 · 考试轻松通过</h1>
+        <p class="tagline">华医网 · 放射考试网 · 陕西继续教育</p>
         <div class="hero-image">
             <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
                 <!-- 书本 -->
@@ -608,75 +576,91 @@
             <div class="stat-label">服务网站</div>
         </div>
         <div class="stat-item">
-            <div class="stat-number">2周</div>
-            <div class="stat-label">完成时效</div>
+            <div class="stat-number">95%+</div>
+            <div class="stat-label">解析准确率</div>
         </div>
         <div class="stat-item">
-            <div class="stat-number">100%</div>
-            <div class="stat-label">通过率</div>
+            <div class="stat-number">24h</div>
+            <div class="stat-label">随时可用</div>
         </div>
     </div>
 
     <!-- 服务范围 -->
     <div class="section">
-        <div class="section-title">服务范围</div>
-        <div class="section-subtitle">覆盖三大主流学习平台，满足您的全部需求</div>
+        <div class="section-title">三大平台 AI 学习助手</div>
+        <div class="section-subtitle">效率提升，考试一次通过</div>
 
         <div class="service-card">
             <div class="card-header">
                 <div class="card-icon">🏥</div>
                 <div class="card-name">华医网</div>
             </div>
-            <div class="card-desc">医疗卫生人员继续教育学习平台，涵盖临床、护理、公卫等多学科课程，轻松完成继续教育学分</div>
-            <div class="card-bottom">
-                <div class="card-price">
-                    <span class="price-amount">¥30</span>
-                    <span class="price-unit">/人</span>
-                </div>
-                <div class="card-tag">热门推荐</div>
-            </div>
-        </div>
-
-        <div class="service-card">
-            <div class="card-header">
-                <div class="card-icon">📖</div>
-                <div class="card-name">陕西继续教育学习平台</div>
-            </div>
-            <div class="card-desc">陕西省专业技术人员继续教育官方学习平台，满足年度继续教育学时要求</div>
-            <div class="card-bottom">
-                <div class="card-price">
-                    <span class="price-amount">¥20</span>
-                    <span class="price-unit">/人</span>
-                </div>
-                <div class="card-tag">性价比高</div>
+            <div class="card-problem">临床太忙，课没时间刷？</div>
+            <div class="card-solution">有一个方法，让你轻松搞定学分</div>
+            <div class="card-tags">
+                <span class="tag">✅ 省心高效</span>
+                <span class="tag">✅ 快速完成</span>
+                <span class="tag">✅ 一次通过</span>
             </div>
         </div>
 
         <div class="service-card">
             <div class="card-header">
                 <div class="card-icon">☢️</div>
-                <div class="card-name">放射工作人员考试网</div>
+                <div class="card-name">放射考试网</div>
             </div>
-            <div class="card-desc">陕西省医疗机构放射工作人员培训与考试专用平台，助力顺利通过资质认证考试</div>
-            <div class="card-bottom">
-                <div class="card-price">
-                    <span class="price-amount">¥50</span>
-                    <span class="price-unit">/人</span>
-                </div>
-                <div class="card-tag">含考试服务</div>
+            <div class="card-problem">放射培训考试，备考时间不够用？</div>
+            <div class="card-solution">有一个方法，让考证之路更轻松</div>
+            <div class="card-tags">
+                <span class="tag">✅ 省心高效</span>
+                <span class="tag">✅ 快速完成</span>
+                <span class="tag">✅ 一次通过</span>
             </div>
         </div>
 
-        
-    </div>
-
-    <!-- 团购优惠 -->
-    <div class="group-discount">
-        <div class="discount-badge">🎉 8折优惠</div>
-        <div class="discount-desc">3人以上团购立享8折 · 拼团更划算</div>
+        <div class="service-card">
+            <div class="card-header">
+                <div class="card-icon">📖</div>
+                <div class="card-name">陕西继续教育</div>
+            </div>
+            <div class="card-problem">年度继续教育，学时怎么也凑不够？</div>
+            <div class="card-solution">有一个方法，帮你顺利达标</div>
+            <div class="card-tags">
+                <span class="tag">✅ 省心高效</span>
+                <span class="tag">✅ 快速完成</span>
+                <span class="tag">✅ 一次通过</span>
+            </div>
+        </div>
     </div>
 
     <div class="wave-divider" style="margin-top: -1px;"></div>
+
+    <!-- 功能介绍 -->
+    <div class="section" style="background: #f0f5ff; padding-top: 20px;">
+        <div class="section-title">功能介绍</div>
+        <div class="section-subtitle">学习太忙没时间刷课？试试这个方法</div>
+        <div class="intro-box">
+            <div class="intro-headline">还在为继续教育发愁？换一种更高效的方式。</div>
+            <ul class="intro-list">
+                <li>
+                    <span class="bullet">✗</span>
+                    <span>课程太多，没时间看</span>
+                </li>
+                <li>
+                    <span class="bullet">✗</span>
+                    <span>考试频繁，每次都心里没底</span>
+                </li>
+                <li>
+                    <span class="bullet">✗</span>
+                    <span>白天上班，晚上还要刷课，精力跟不上</span>
+                </li>
+            </ul>
+            <div class="intro-footer">
+                其实有一个方法，可以帮你省心省力。<br>
+                <span class="arrow">👇 扫码了解详情</span>
+            </div>
+        </div>
+    </div>
 
     <!-- 服务流程 -->
     <div class="flow-section">
@@ -685,23 +669,23 @@
         <div class="flow-steps">
             <div class="flow-step">
                 <div class="step-icon">💬</div>
-                <div class="step-title">咨询客服</div>
-                <div class="step-desc">扫码添加微信</div>
+                <div class="step-title">扫码咨询</div>
+                <div class="step-desc">添加微信客服</div>
             </div>
             <div class="flow-step">
                 <div class="step-icon">📋</div>
-                <div class="step-title">确认需求</div>
-                <div class="step-desc">选择网站和套餐</div>
+                <div class="step-title">说明需求</div>
+                <div class="step-desc">告诉我们您的平台</div>
             </div>
             <div class="flow-step">
-                <div class="step-icon">⚙️</div>
-                <div class="step-title">开始服务</div>
-                <div class="step-desc">听课+考试</div>
+                <div class="step-icon">📋</div>
+                <div class="step-title">开始使用</div>
+                <div class="step-desc">后续服务交给客服</div>
             </div>
             <div class="flow-step">
                 <div class="step-icon">✅</div>
-                <div class="step-title">完成交付</div>
-                <div class="step-desc">通知确认结果</div>
+                <div class="step-title">轻松完成</div>
+                <div class="step-desc">省心省力坐等结果</div>
             </div>
         </div>
     </div>
@@ -710,40 +694,39 @@
 
     <!-- 服务承诺 -->
     <div class="section" style="background: #fff; padding-top: 25px;">
-        <div class="section-title">服务承诺</div>
-        <div class="section-subtitle">六大保障，让您放心选择</div>
+        <div class="section-title">六大核心保障</div>
+        <div class="section-subtitle">省心高效，值得信赖</div>
         <div class="promise-grid">
             <div class="promise-item">
-                <div class="promise-icon">✅</div>
-                <div class="promise-title">听课+考试</div>
-                <div class="promise-desc">全程代学代考，省心省力</div>
+                <div class="promise-icon">⚡</div>
+                <div class="promise-title">效率提升</div>
+                <div class="promise-desc">学习助手全程辅助，省下大量时间</div>
             </div>
             <div class="promise-item">
-                <div class="promise-icon">🏆</div>
-                <div class="promise-title">包通过</div>
-                <div class="promise-desc">不通过全额退款，零风险</div>
+                <div class="promise-icon">📚</div>
+                <div class="promise-title">全面覆盖</div>
+                <div class="promise-desc">三大平台主流科目一站式搞定</div>
+            </div>
+            <div class="promise-item">
+                <div class="promise-icon">🚀</div>
+                <div class="promise-title">快速完成</div>
+                <div class="promise-desc">高效学习，不浪费时间</div>
+            </div>
+            <div class="promise-item">
+                <div class="promise-icon">🔒</div>
+                <div class="promise-title">隐私安全</div>
+                <div class="promise-desc">信息严格加密，安全可靠</div>
+            </div>
+            <div class="promise-item">
+                <div class="promise-icon">🔄</div>
+                <div class="promise-title">题库更新</div>
+                <div class="promise-desc">持续更新最新题库</div>
             </div>
             <div class="promise-item">
                 <div class="promise-icon">💬</div>
-                <div class="promise-title">全程跟进</div>
-                <div class="promise-desc">进度实时反馈，心中有数</div>
+                <div class="promise-title">专属客服</div>
+                <div class="promise-desc">7×24小时全程跟进</div>
             </div>
-            <div class="promise-item">
-                <div class="promise-icon">💰</div>
-                <div class="promise-title">售后保障</div>
-                <div class="promise-desc">不满意可退款，无忧服务</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 服务时效 -->
-    <div class="section">
-        <div class="section-title">服务时效</div>
-        <div class="section-subtitle">高效交付，绝不拖延</div>
-        <div class="timeline-box">
-            <div class="timeline-icon">⏱️</div>
-            <div class="timeline-text">2周内完成</div>
-            <div class="timeline-sub">下单后2周内完成全部课程与考试<br>超时自动退款</div>
         </div>
     </div>
 
@@ -765,8 +748,8 @@
 
     <!-- 底部 -->
     <div class="footer">
-        <div class="footer-slogan">专业托管 · 安全高效 · 值得信赖</div>
-        <p>© 2026 一站式学习服务平台</p>
+        <div class="footer-slogan">AI 学习助手 · 省心高效 · 值得信赖</div>
+        <p>© 2026 AI 学习助手平台</p>
     </div>
 
 </body>
