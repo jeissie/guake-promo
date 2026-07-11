@@ -158,27 +158,34 @@
         }
 
         /* 服务卡片 */
+        .service-cards-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+        }
+
         .service-card {
             background: #fff;
-            border-radius: 20px;
-            padding: 25px 20px;
-            margin-bottom: 16px;
+            border-radius: 16px;
+            padding: 20px 14px;
             box-shadow: 0 4px 20px rgba(13,79,140,0.06);
             border: 1px solid rgba(13,79,140,0.08);
             transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
         .service-card::before {
             content: '';
             position: absolute;
             top: 0;
-            right: 0;
-            width: 100px;
-            height: 100px;
-            border-radius: 0 0 0 100%;
-            opacity: 0.06;
+            left: 0;
+            width: 100%;
+            height: 4px;
         }
 
         .service-card:nth-child(1)::before { background: #0d4f8c; }
@@ -190,22 +197,15 @@
             box-shadow: 0 8px 30px rgba(13,79,140,0.12);
         }
 
-        .service-card .card-header {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 12px;
-        }
-
         .service-card .card-icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 14px;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 26px;
-            flex-shrink: 0;
+            font-size: 24px;
+            margin-bottom: 10px;
         }
 
         .service-card:nth-child(1) .card-icon {
@@ -219,36 +219,30 @@
         }
 
         .service-card .card-name {
-            font-size: 17px;
+            font-size: 14px;
             font-weight: 600;
             color: #1a3a5c;
+            margin-bottom: 8px;
         }
 
         .service-card .card-problem {
-            font-size: 14px;
-            color: #555;
+            font-size: 12px;
+            color: #666;
             margin-bottom: 10px;
-            line-height: 1.7;
-        }
-
-        .service-card .card-solution {
-            font-size: 14px;
-            color: #0d4f8c;
-            margin-bottom: 15px;
-            line-height: 1.7;
-            font-weight: 500;
+            line-height: 1.6;
         }
 
         .service-card .card-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
+            gap: 6px;
+            justify-content: center;
+            margin-top: auto;
         }
 
         .service-card .tag {
-            font-size: 11px;
-            padding: 4px 10px;
+            font-size: 10px;
+            padding: 3px 8px;
             border-radius: 20px;
             background: #e8f4fd;
             color: #0d4f8c;
@@ -588,47 +582,37 @@
     <!-- 服务范围 -->
     <div class="section">
         <div class="section-title">三大平台 AI 学习助手</div>
-        <div class="section-subtitle">效率提升，考试一次通过</div>
+        <div class="section-subtitle">效率提升10倍，考试更有信心</div>
 
-        <div class="service-card">
-            <div class="card-header">
+        <div class="service-cards-row">
+            <div class="service-card">
                 <div class="card-icon">🏥</div>
                 <div class="card-name">华医网</div>
+                <div class="card-problem">临床太忙，没有时间刷课</div>
+                <div class="card-tags">
+                    <span class="tag">✅ 省心高效</span>
+                    <span class="tag">✅ 快速完成</span>
+                </div>
             </div>
-            <div class="card-problem">临床太忙，课没时间刷？</div>
-            <div class="card-solution">有一个方法，让你轻松搞定学分</div>
-            <div class="card-tags">
-                <span class="tag">✅ 省心高效</span>
-                <span class="tag">✅ 快速完成</span>
-                <span class="tag">✅ 一次通过</span>
-            </div>
-        </div>
 
-        <div class="service-card">
-            <div class="card-header">
-                <div class="card-icon">☢️</div>
-                <div class="card-name">放射考试网</div>
-            </div>
-            <div class="card-problem">放射培训考试，备考时间不够用？</div>
-            <div class="card-solution">有一个方法，让考证之路更轻松</div>
-            <div class="card-tags">
-                <span class="tag">✅ 省心高效</span>
-                <span class="tag">✅ 快速完成</span>
-                <span class="tag">✅ 一次通过</span>
-            </div>
-        </div>
-
-        <div class="service-card">
-            <div class="card-header">
+            <div class="service-card">
                 <div class="card-icon">📖</div>
                 <div class="card-name">陕西继续教育</div>
+                <div class="card-problem">学分要求多，总是为凑不够发愁</div>
+                <div class="card-tags">
+                    <span class="tag">✅ 省心高效</span>
+                    <span class="tag">✅ 快速完成</span>
+                </div>
             </div>
-            <div class="card-problem">年度继续教育，学时怎么也凑不够？</div>
-            <div class="card-solution">有一个方法，帮你顺利达标</div>
-            <div class="card-tags">
-                <span class="tag">✅ 省心高效</span>
-                <span class="tag">✅ 快速完成</span>
-                <span class="tag">✅ 一次通过</span>
+
+            <div class="service-card">
+                <div class="card-icon">☢️</div>
+                <div class="card-name">放射考试网</div>
+                <div class="card-problem">放射考试多，通过率低压力大</div>
+                <div class="card-tags">
+                    <span class="tag">✅ 省心高效</span>
+                    <span class="tag">✅ 快速完成</span>
+                </div>
             </div>
         </div>
     </div>
@@ -638,7 +622,7 @@
     <!-- 功能介绍 -->
     <div class="section" style="background: #f0f5ff; padding-top: 20px;">
         <div class="section-title">功能介绍</div>
-        <div class="section-subtitle">学习太忙没时间刷课？试试这个方法</div>
+        <div class="section-subtitle">有了学习助手，学习变得轻松简单</div>
         <div class="intro-box">
             <div class="intro-headline">还在为继续教育发愁？换一种更高效的方式。</div>
             <ul class="intro-list">
@@ -657,7 +641,7 @@
             </ul>
             <div class="intro-footer">
                 其实有一个方法，可以帮你省心省力。<br>
-                <span class="arrow">👇 扫码了解详情</span>
+                <span class="arrow">有了这个学习助手，帮你高效梳理课程、掌握考试要点，轻松应对每一次考核。</span>
             </div>
         </div>
     </div>
@@ -665,22 +649,17 @@
     <!-- 服务流程 -->
     <div class="flow-section">
         <div class="section-title">服务流程</div>
-        <div class="section-subtitle">简单四步，轻松搞定</div>
+        <div class="section-subtitle">简单三步，轻松搞定</div>
         <div class="flow-steps">
             <div class="flow-step">
                 <div class="step-icon">💬</div>
-                <div class="step-title">扫码咨询</div>
-                <div class="step-desc">添加微信客服</div>
+                <div class="step-title">扫码获取</div>
+                <div class="step-desc">添加客服微信</div>
             </div>
             <div class="flow-step">
                 <div class="step-icon">📋</div>
                 <div class="step-title">说明需求</div>
                 <div class="step-desc">告诉我们您的平台</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-icon">📋</div>
-                <div class="step-title">开始使用</div>
-                <div class="step-desc">后续服务交给客服</div>
             </div>
             <div class="flow-step">
                 <div class="step-icon">✅</div>
@@ -700,7 +679,7 @@
             <div class="promise-item">
                 <div class="promise-icon">⚡</div>
                 <div class="promise-title">效率提升</div>
-                <div class="promise-desc">学习助手全程辅助，省下大量时间</div>
+                <div class="promise-desc">全程辅助，省下大量时间</div>
             </div>
             <div class="promise-item">
                 <div class="promise-icon">📚</div>
