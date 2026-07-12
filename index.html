@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AI 学习助手 · 考试轻松通过</title>
+    <title>学习助手 · 考试轻松通过</title>
     <style>
         * {
             margin: 0;
@@ -157,96 +157,216 @@
             border-radius: 2px;
         }
 
-        /* 服务卡片 */
-        .service-cards-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 12px;
+        /* 服务卡片 - 全宽纵向 */
+        .service-cards-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
         }
 
         .service-card {
-            background: #fff;
-            border-radius: 16px;
-            padding: 20px 14px;
-            box-shadow: 0 4px 20px rgba(13,79,140,0.06);
-            border: 1px solid rgba(13,79,140,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 18px;
+            padding: 22px 20px 20px;
             position: relative;
             overflow: hidden;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+            align-items: flex-start;
+            gap: 16px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
+        .service-card:hover {
+            transform: translateY(-3px) scale(1.005);
+        }
+
+        /* 华医网：深蓝渐变 */
+        .service-card:nth-child(1) {
+            background: linear-gradient(135deg, #f0f6ff 0%, #e3f0ff 60%, #f5f9ff 100%);
+            border: 1px solid rgba(13,79,140,0.12);
+            box-shadow: 0 4px 24px rgba(13,79,140,0.10);
+        }
+        .service-card:nth-child(1):hover {
+            box-shadow: 0 10px 40px rgba(13,79,140,0.18);
+        }
+
+        /* 陕西继续教育：青蓝渐变 */
+        .service-card:nth-child(2) {
+            background: linear-gradient(135deg, #f0f7ff 0%, #e5f3ff 60%, #f4faff 100%);
+            border: 1px solid rgba(26,140,255,0.12);
+            box-shadow: 0 4px 24px rgba(26,140,255,0.08);
+        }
+        .service-card:nth-child(2):hover {
+            box-shadow: 0 10px 40px rgba(26,140,255,0.16);
+        }
+
+        /* 放射考试网：浅蓝渐变 */
+        .service-card:nth-child(3) {
+            background: linear-gradient(135deg, #f5faff 0%, #edf5ff 60%, #f8fbff 100%);
+            border: 1px solid rgba(90,180,255,0.14);
+            box-shadow: 0 4px 24px rgba(90,180,255,0.08);
+        }
+        .service-card:nth-child(3):hover {
+            box-shadow: 0 10px 40px rgba(90,180,255,0.16);
+        }
+
+        /* 左侧粗渐变色条 */
         .service-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 4px;
+            width: 5px;
+            height: 100%;
+            border-radius: 18px 0 0 18px;
         }
+        .service-card:nth-child(1)::before { background: linear-gradient(180deg, #0d4f8c, #1a8cff); }
+        .service-card:nth-child(2)::before { background: linear-gradient(180deg, #1a8cff, #5bb5ff); }
+        .service-card:nth-child(3)::before { background: linear-gradient(180deg, #5bb5ff, #a0d4ff); }
 
-        .service-card:nth-child(1)::before { background: #0d4f8c; }
-        .service-card:nth-child(2)::before { background: #1a8cff; }
-        .service-card:nth-child(3)::before { background: #5bb5ff; }
-
-        .service-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(13,79,140,0.12);
+        /* 右上角装饰圆点 */
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            opacity: 0.08;
         }
+        .service-card:nth-child(1)::after { background: #0d4f8c; }
+        .service-card:nth-child(2)::after { background: #1a8cff; }
+        .service-card:nth-child(3)::after { background: #5bb5ff; }
 
+        /* 图标 */
         .service-card .card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+            width: 58px;
+            height: 58px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            margin-bottom: 10px;
+            font-size: 28px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
-
         .service-card:nth-child(1) .card-icon {
-            background: linear-gradient(135deg, #e8f4fd, #d0e8f9);
+            background: linear-gradient(145deg, #c8e5ff, #ddf0ff);
+            box-shadow: 0 4px 16px rgba(13,79,140,0.20);
         }
         .service-card:nth-child(2) .card-icon {
-            background: linear-gradient(135deg, #e0f0ff, #c8e0ff);
+            background: linear-gradient(145deg, #d5edff, #e8f5ff);
+            box-shadow: 0 4px 16px rgba(26,140,255,0.18);
         }
         .service-card:nth-child(3) .card-icon {
-            background: linear-gradient(135deg, #edf5ff, #d8eaff);
+            background: linear-gradient(145deg, #e5f3ff, #f0f8ff);
+            box-shadow: 0 4px 16px rgba(90,180,255,0.18);
         }
 
-        .service-card .card-name {
-            font-size: 14px;
-            font-weight: 600;
-            color: #1a3a5c;
+        .card-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* 卡片头部：平台名 + 价格徽章 */
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             margin-bottom: 8px;
+            gap: 8px;
         }
 
-        .service-card .card-problem {
+        .card-name-wrap {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .card-name-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .service-card:nth-child(1) .card-name-dot { background: #0d4f8c; box-shadow: 0 0 6px rgba(13,79,140,0.4); }
+        .service-card:nth-child(2) .card-name-dot { background: #1a8cff; box-shadow: 0 0 6px rgba(26,140,255,0.4); }
+        .service-card:nth-child(3) .card-name-dot { background: #5bb5ff; box-shadow: 0 0 6px rgba(91,181,255,0.4); }
+
+        .card-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a3a5c;
+        }
+
+        /* 价格徽章 */
+        .card-price-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+        .service-card:nth-child(1) .card-price-badge {
+            background: linear-gradient(135deg, #0d4f8c, #1a6fc4);
+            color: #fff;
+            box-shadow: 0 3px 10px rgba(13,79,140,0.3);
+        }
+        .service-card:nth-child(2) .card-price-badge {
+            background: linear-gradient(135deg, #0d4f8c, #1a6fc4);
+            color: #fff;
+            box-shadow: 0 3px 10px rgba(13,79,140,0.3);
+        }
+        .service-card:nth-child(3) .card-price-badge {
+            background: linear-gradient(135deg, #0d4f8c, #1a6fc4);
+            color: #fff;
+            box-shadow: 0 3px 10px rgba(13,79,140,0.3);
+        }
+
+        /* 问题描述 */
+        .card-problem {
             font-size: 12px;
-            color: #666;
-            margin-bottom: 10px;
+            color: #5a6a80;
             line-height: 1.6;
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 12px;
         }
+        .card-problem::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+        .service-card:nth-child(1) .card-problem::before { background: #0d4f8c; }
+        .service-card:nth-child(2) .card-problem::before { background: #1a8cff; }
+        .service-card:nth-child(3) .card-problem::before { background: #5bb5ff; }
 
-        .service-card .card-tags {
+        /* 标签组 */
+        .card-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
-            justify-content: center;
-            margin-top: auto;
         }
 
-        .service-card .tag {
-            font-size: 10px;
-            padding: 3px 8px;
+        .card-tag {
+            font-size: 11px;
+            padding: 3px 11px;
             border-radius: 20px;
-            background: #e8f4fd;
-            color: #0d4f8c;
-            font-weight: 500;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        .service-card .card-tag {
+            background: rgba(22,140,60,0.08);
+            color: #16a83c;
+            border: 1px solid rgba(22,140,60,0.18);
         }
 
         /* 流程图 */
@@ -539,24 +659,21 @@
 
     <!-- 顶部 Banner -->
     <div class="banner">
-        <h1>🚀 AI 学习助手 · 考试轻松通过</h1>
+        <h1>🚀 学习助手 · 考试轻松通过</h1>
         <p class="tagline">华医网 · 放射考试网 · 陕西继续教育</p>
         <div class="hero-image">
             <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-                <!-- 书本 -->
                 <rect x="15" y="30" width="40" height="55" rx="4" fill="#1a8cff" opacity="0.9"/>
                 <rect x="18" y="33" width="34" height="49" rx="2" fill="#fff" opacity="0.3"/>
                 <line x1="22" y1="42" x2="48" y2="42" stroke="#fff" stroke-width="2" opacity="0.5"/>
                 <line x1="22" y1="50" x2="44" y2="50" stroke="#fff" stroke-width="2" opacity="0.4"/>
                 <line x1="22" y1="58" x2="46" y2="58" stroke="#fff" stroke-width="2" opacity="0.3"/>
-                <!-- 奖杯 -->
                 <path d="M70 25 L70 50 Q70 65 85 65 Q100 65 100 50 L100 25 Z" fill="#ffd700" opacity="0.9"/>
                 <rect x="80" y="65" width="10" height="8" rx="1" fill="#e6b800"/>
                 <rect x="74" y="73" width="22" height="4" rx="2" fill="#e6b800"/>
                 <path d="M70 30 L62 30 Q58 30 58 35 L58 38 Q58 45 65 47" fill="none" stroke="#ffd700" stroke-width="3" opacity="0.8"/>
                 <path d="M100 30 L108 30 Q112 30 112 35 L112 38 Q112 45 105 47" fill="none" stroke="#ffd700" stroke-width="3" opacity="0.8"/>
                 <text x="85" y="48" text-anchor="middle" fill="#e6b800" font-size="14" font-weight="bold">★</text>
-                <!-- 勾选标记 -->
                 <circle cx="55" cy="95" r="15" fill="#4CAF50" opacity="0.9"/>
                 <path d="M47 95 L53 101 L63 89" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -581,37 +698,61 @@
 
     <!-- 服务范围 -->
     <div class="section">
-        <div class="section-title">三大平台 AI 学习助手</div>
+        <div class="section-title">三大平台学习助手</div>
         <div class="section-subtitle">效率提升10倍，考试更有信心</div>
 
-        <div class="service-cards-row">
+        <div class="service-cards-wrap">
             <div class="service-card">
                 <div class="card-icon">🏥</div>
-                <div class="card-name">华医网</div>
-                <div class="card-problem">临床太忙，没有时间刷课</div>
-                <div class="card-tags">
-                    <span class="tag">✅ 省心高效</span>
-                    <span class="tag">✅ 快速完成</span>
+                <div class="card-body">
+                    <div class="card-header">
+                        <div class="card-name-wrap">
+                            <span class="card-name-dot"></span>
+                            <span class="card-name">华医网</span>
+                        </div>
+                        <span class="card-price-badge">¥30/人</span>
+                    </div>
+                    <div class="card-problem">临床太忙，没有时间刷课</div>
+                    <div class="card-tags">
+                        <span class="card-tag">省心高效</span>
+                        <span class="card-tag">快速完成</span>
+                    </div>
                 </div>
             </div>
 
             <div class="service-card">
                 <div class="card-icon">📖</div>
-                <div class="card-name">陕西继续教育</div>
-                <div class="card-problem">学分要求多，总是为凑不够发愁</div>
-                <div class="card-tags">
-                    <span class="tag">✅ 省心高效</span>
-                    <span class="tag">✅ 快速完成</span>
+                <div class="card-body">
+                    <div class="card-header">
+                        <div class="card-name-wrap">
+                            <span class="card-name-dot"></span>
+                            <span class="card-name">陕西继续教育</span>
+                        </div>
+                        <span class="card-price-badge">¥20/人</span>
+                    </div>
+                    <div class="card-problem">学分要求多，总是为凑不够发愁</div>
+                    <div class="card-tags">
+                        <span class="card-tag">省心高效</span>
+                        <span class="card-tag">快速完成</span>
+                    </div>
                 </div>
             </div>
 
             <div class="service-card">
                 <div class="card-icon">☢️</div>
-                <div class="card-name">放射考试网</div>
-                <div class="card-problem">放射考试多，通过率低压力大</div>
-                <div class="card-tags">
-                    <span class="tag">✅ 省心高效</span>
-                    <span class="tag">✅ 快速完成</span>
+                <div class="card-body">
+                    <div class="card-header">
+                        <div class="card-name-wrap">
+                            <span class="card-name-dot"></span>
+                            <span class="card-name">放射考试网</span>
+                        </div>
+                        <span class="card-price-badge">¥50/人</span>
+                    </div>
+                    <div class="card-problem">放射考试多，通过率低压力大</div>
+                    <div class="card-tags">
+                        <span class="card-tag">省心高效</span>
+                        <span class="card-tag">快速完成</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -679,7 +820,7 @@
             <div class="promise-item">
                 <div class="promise-icon">⚡</div>
                 <div class="promise-title">效率提升</div>
-                <div class="promise-desc">全程辅助，省下大量时间</div>
+                <div class="promise-desc">省心省力，无需您动手</div>
             </div>
             <div class="promise-item">
                 <div class="promise-icon">📚</div>
@@ -689,7 +830,7 @@
             <div class="promise-item">
                 <div class="promise-icon">🚀</div>
                 <div class="promise-title">快速完成</div>
-                <div class="promise-desc">高效学习，不浪费时间</div>
+                <div class="promise-desc">高效完成，不浪费时间</div>
             </div>
             <div class="promise-item">
                 <div class="promise-icon">🔒</div>
@@ -704,7 +845,7 @@
             <div class="promise-item">
                 <div class="promise-icon">💬</div>
                 <div class="promise-title">专属客服</div>
-                <div class="promise-desc">7×24小时全程跟进</div>
+                <div class="promise-desc">全程跟进，有问必答</div>
             </div>
         </div>
     </div>
@@ -714,11 +855,11 @@
     <!-- 微信客服 -->
     <div class="contact-section">
         <div class="section-title">联系我们</div>
-        <div class="section-subtitle">扫码添加微信客服，7×24小时在线</div>
+        <div class="section-subtitle">扫码添加微信客服，随时解答您的疑问</div>
         <div class="contact-card">
             <div class="contact-icon">💬</div>
             <div class="contact-title">微信客服</div>
-            <div class="contact-desc">专业客服一对一服务，随时解答您的疑问</div>
+            <div class="contact-desc">专业客服一对一服务，全程跟进有问必答</div>
             <img src="qrcode.png" alt="微信客服二维码" class="qr-image">
             <div class="contact-hint">长按识别二维码添加</div>
             <a href="https://work.weixin.qq.com/ca/cawcde01a82cc3fe5a" target="_blank" class="contact-btn">立即咨询</a>
@@ -727,8 +868,8 @@
 
     <!-- 底部 -->
     <div class="footer">
-        <div class="footer-slogan">AI 学习助手 · 省心高效 · 值得信赖</div>
-        <p>© 2026 AI 学习助手平台</p>
+        <div class="footer-slogan">学习助手 · 省心高效 · 值得信赖</div>
+        <p>© 2026 学习助手平台</p>
     </div>
 
 </body>
