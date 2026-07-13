@@ -872,5 +872,13 @@
         <p>© 2026 学习助手平台</p>
     </div>
 
+    <!-- 绕过CDN缓存：每次访问自动给图片追加时间戳 -->
+    <script>
+        var t = Date.now();
+        document.querySelectorAll('img[src*="qrcode"]').forEach(function(img) {
+            img.src = img.src.split('?')[0] + '?v=' + t;
+        });
+    </script>
+
 </body>
 </html>
