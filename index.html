@@ -179,14 +179,15 @@
             transform: translateY(-3px) scale(1.005);
         }
 
-        /* 华医网：深蓝渐变 */
-        .service-card:nth-child(1) {
-            background: linear-gradient(135deg, #f0f6ff 0%, #e3f0ff 60%, #f5f9ff 100%);
-            border: 1px solid rgba(13,79,140,0.12);
-            box-shadow: 0 4px 24px rgba(13,79,140,0.10);
+        /* 华医网：降价促销 · 红橙暖色主题 */
+        .service-card--promo {
+            background: linear-gradient(135deg, #fff7f3 0%, #ffe9e0 55%, #fff5f0 100%);
+            border: 1px solid rgba(255,77,79,0.24);
+            box-shadow: 0 4px 24px rgba(255,77,79,0.14);
+            padding-top: 50px;
         }
-        .service-card:nth-child(1):hover {
-            box-shadow: 0 10px 40px rgba(13,79,140,0.18);
+        .service-card--promo:hover {
+            box-shadow: 0 10px 40px rgba(255,77,79,0.26);
         }
 
         /* 陕西继续教育：青蓝渐变 */
@@ -219,7 +220,7 @@
             height: 100%;
             border-radius: 18px 0 0 18px;
         }
-        .service-card:nth-child(1)::before { background: linear-gradient(180deg, #0d4f8c, #1a8cff); }
+        .service-card--promo::before { background: linear-gradient(180deg, #ff4d4f, #ff8a3d); }
         .service-card:nth-child(2)::before { background: linear-gradient(180deg, #1a8cff, #5bb5ff); }
         .service-card:nth-child(3)::before { background: linear-gradient(180deg, #5bb5ff, #a0d4ff); }
 
@@ -234,7 +235,7 @@
             border-radius: 50%;
             opacity: 0.08;
         }
-        .service-card:nth-child(1)::after { background: #0d4f8c; }
+        .service-card--promo::after { background: #ff4d4f; opacity: 0.12; }
         .service-card:nth-child(2)::after { background: #1a8cff; }
         .service-card:nth-child(3)::after { background: #5bb5ff; }
 
@@ -250,9 +251,9 @@
             flex-shrink: 0;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
-        .service-card:nth-child(1) .card-icon {
-            background: linear-gradient(145deg, #c8e5ff, #ddf0ff);
-            box-shadow: 0 4px 16px rgba(13,79,140,0.20);
+        .service-card--promo .card-icon {
+            background: linear-gradient(145deg, #ffe1d8, #fff1ec);
+            box-shadow: 0 4px 16px rgba(255,77,79,0.25);
         }
         .service-card:nth-child(2) .card-icon {
             background: linear-gradient(145deg, #d5edff, #e8f5ff);
@@ -289,7 +290,7 @@
             border-radius: 50%;
             flex-shrink: 0;
         }
-        .service-card:nth-child(1) .card-name-dot { background: #0d4f8c; box-shadow: 0 0 6px rgba(13,79,140,0.4); }
+        .service-card--promo .card-name-dot { background: #ff4d4f; box-shadow: 0 0 6px rgba(255,77,79,0.5); }
         .service-card:nth-child(2) .card-name-dot { background: #1a8cff; box-shadow: 0 0 6px rgba(26,140,255,0.4); }
         .service-card:nth-child(3) .card-name-dot { background: #5bb5ff; box-shadow: 0 0 6px rgba(91,181,255,0.4); }
 
@@ -297,6 +298,67 @@
             font-size: 15px;
             font-weight: 700;
             color: #1a3a5c;
+        }
+
+        /* 华医网降价横幅 */
+        .promo-ribbon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 34px;
+            background: linear-gradient(90deg, #ff4d4f, #ff7a3d);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            box-shadow: 0 2px 10px rgba(255,77,79,0.35);
+            z-index: 1;
+        }
+
+        .promo-ribbon .ribbon-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.25);
+            font-size: 13px;
+            animation: dropBounce 1.2s ease-in-out infinite;
+        }
+
+        @keyframes dropBounce {
+            0%, 100% { transform: translateY(-1px); }
+            50% { transform: translateY(2px); }
+        }
+
+        /* 卡片图标上的降价角标 */
+        .card-icon--promo {
+            position: relative;
+        }
+        .card-icon--promo .icon-drop {
+            position: absolute;
+            top: -9px;
+            right: -9px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff4d4f, #ff7a3d);
+            color: #fff;
+            font-size: 15px;
+            font-weight: 900;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 8px rgba(255,77,79,0.5);
+            animation: dropBounce 1.2s ease-in-out infinite;
         }
 
         /* 价格徽章 */
@@ -310,10 +372,25 @@
             font-weight: 800;
             flex-shrink: 0;
         }
-        .service-card:nth-child(1) .card-price-badge {
-            background: linear-gradient(135deg, #0d4f8c, #1a6fc4);
+        .service-card--promo .card-price-badge {
+            gap: 6px;
+            padding: 4px 12px;
+            background: linear-gradient(135deg, #ff4d4f, #ff7a3d);
             color: #fff;
-            box-shadow: 0 3px 10px rgba(13,79,140,0.3);
+            box-shadow: 0 3px 10px rgba(255,77,79,0.4);
+        }
+        .card-price-badge .price-original {
+            font-size: 11px;
+            font-weight: 600;
+            text-decoration: line-through;
+            opacity: 0.8;
+        }
+        .card-price-badge .price-now {
+            font-size: 15px;
+        }
+        .card-price-badge .price-now .price-unit {
+            font-size: 11px;
+            font-weight: 600;
         }
         .service-card:nth-child(2) .card-price-badge {
             background: linear-gradient(135deg, #0d4f8c, #1a6fc4);
@@ -345,7 +422,7 @@
             border-radius: 50%;
             opacity: 0.5;
         }
-        .service-card:nth-child(1) .card-problem::before { background: #0d4f8c; }
+        .service-card--promo .card-problem::before { background: #ff4d4f; }
         .service-card:nth-child(2) .card-problem::before { background: #1a8cff; }
         .service-card:nth-child(3) .card-problem::before { background: #5bb5ff; }
 
@@ -367,6 +444,11 @@
             background: rgba(22,140,60,0.08);
             color: #16a83c;
             border: 1px solid rgba(22,140,60,0.18);
+        }
+        .service-card--promo .card-tag--promo {
+            background: rgba(255,77,79,0.10);
+            color: #ff4d4f;
+            border: 1px solid rgba(255,77,79,0.28);
         }
 
         /* 流程图 */
@@ -702,20 +784,27 @@
         <div class="section-subtitle">效率提升10倍，考试更有信心</div>
 
         <div class="service-cards-wrap">
-            <div class="service-card">
-                <div class="card-icon">🏥</div>
+            <div class="service-card service-card--promo">
+                <div class="promo-ribbon">
+                    <span class="ribbon-icon">↓</span>
+                    <span>限时降价 · 立省 ¥12</span>
+                </div>
+                <div class="card-icon card-icon--promo">🏥<span class="icon-drop">↓</span></div>
                 <div class="card-body">
                     <div class="card-header">
                         <div class="card-name-wrap">
                             <span class="card-name-dot"></span>
                             <span class="card-name">华医网</span>
                         </div>
-                        <span class="card-price-badge">¥30/人</span>
+                        <span class="card-price-badge">
+                            <span class="price-original">¥30</span>
+                            <span class="price-now">¥18<span class="price-unit">/人</span></span>
+                        </span>
                     </div>
                     <div class="card-problem">临床太忙，没有时间刷课</div>
                     <div class="card-tags">
+                        <span class="card-tag card-tag--promo">降价特惠</span>
                         <span class="card-tag">省心高效</span>
-                        <span class="card-tag">快速完成</span>
                     </div>
                 </div>
             </div>
@@ -862,7 +951,7 @@
             <div class="contact-desc">专业客服一对一服务，全程跟进有问必答</div>
             <img src="qrcode.png" alt="微信客服二维码" class="qr-image">
             <div class="contact-hint">长按识别二维码添加</div>
-            <a href="https://work.weixin.qq.com/ca/cawcde01a82cc3fe5a" target="_blank" class="contact-btn">立即咨询</a>
+            <a href="https://work.weixin.qq.com/kfid/kfc1d5055e56a9827e3" target="_blank" class="contact-btn">立即咨询</a>
         </div>
     </div>
 
