@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BY93BV08HV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-BY93BV08HV');
-</script>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?d10d2567d18411747f910ce76cd0412a";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
 
 
     <meta charset="UTF-8">
@@ -962,38 +964,6 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-          var target = document.querySelector('.contact-section');
-
-          if (target) {
-            var hasTracked = false;
-
-            var observer = new IntersectionObserver(
-              function(entries) {
-                entries.forEach(function(entry) {
-                  if (entry.isIntersecting && !hasTracked) {
-                    hasTracked = true;
-
-                    if (typeof gtag === 'function') {
-                      gtag('event', 'contact_section_view', {
-                        section_class: 'contact-section',
-                        page_location: window.location.href,
-                        page_title: document.title
-                      });
-                    }
-
-                    observer.disconnect();
-                  }
-                });
-              },
-              { threshold: 0.3 }
-            );
-
-            observer.observe(target);
-          }
-        });
-    </script>
 
     <!-- 底部 -->
     <div class="footer">
