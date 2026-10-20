@@ -1,983 +1,448 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?d10d2567d18411747f910ce76cd0412a";
-          var s = document.getElementsByTagName("script")[0]; 
-          s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
-
-
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>学习助手 · 考试轻松通过</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-            background: #f0f5ff;
-            color: #333;
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-
-        /* 顶部 Banner */
-        .banner {
-            background: linear-gradient(135deg, #0a1628 0%, #1a3a5c 40%, #0d4f8c 100%);
-            color: #fff;
-            padding: 60px 20px 50px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .banner::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 30% 40%, rgba(26,140,255,0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 60%, rgba(255,255,255,0.08) 0%, transparent 40%);
-            animation: pulse 6s ease-in-out infinite;
-        }
-
-        .banner::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background: #f0f5ff;
-            clip-path: ellipse(55% 100% at 50% 100%);
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.05) rotate(1deg); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .banner h1 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .banner .tagline {
-            font-size: 14px;
-            color: rgba(255,255,255,0.85);
-            letter-spacing: 3px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .banner .hero-image {
-            margin-top: 25px;
-            position: relative;
-            z-index: 1;
-            animation: float 4s ease-in-out infinite;
-        }
-
-        .banner .hero-image svg {
-            width: 120px;
-            height: 120px;
-        }
-
-        /* 统计数字条 */
-        .stats-bar {
-            display: flex;
-            justify-content: space-around;
-            padding: 20px 15px;
-            background: #fff;
-            margin: -20px 20px 0;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(13,79,140,0.1);
-            position: relative;
-            z-index: 2;
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        .stats-bar .stat-item {
-            text-align: center;
-        }
-
-        .stats-bar .stat-number {
-            font-size: 22px;
-            font-weight: 800;
-            color: #0d4f8c;
-        }
-
-        .stats-bar .stat-label {
-            font-size: 11px;
-            color: #888;
-            margin-top: 2px;
-        }
-
-        /* 通用模块 */
-        .section {
-            padding: 35px 20px 20px;
-        }
-
-        .section-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: #0d4f8c;
-            text-align: center;
-            margin-bottom: 8px;
-            position: relative;
-        }
-
-        .section-subtitle {
-            font-size: 13px;
-            color: #999;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 40px;
-            height: 3px;
-            background: linear-gradient(90deg, #0d4f8c, #1a8cff);
-            margin: 8px auto 0;
-            border-radius: 2px;
-        }
-
-        /* 服务卡片 - 全宽纵向 */
-        .service-cards-wrap {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .service-card {
-            border-radius: 18px;
-            padding: 22px 20px 20px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-3px) scale(1.005);
-        }
-
-        /* 华医网：降价促销 · 红橙暖色主题 */
-        .service-card--promo {
-            background: linear-gradient(135deg, #fff7f3 0%, #ffe9e0 55%, #fff5f0 100%);
-            border: 1px solid rgba(255,77,79,0.24);
-            box-shadow: 0 4px 24px rgba(255,77,79,0.14);
-            padding-top: 50px;
-        }
-        .service-card--promo:hover {
-            box-shadow: 0 10px 40px rgba(255,77,79,0.26);
-        }
-
-        /* 陕西继续教育：青蓝渐变 */
-        .service-card:nth-child(2) {
-            background: linear-gradient(135deg, #f0f7ff 0%, #e5f3ff 60%, #f4faff 100%);
-            border: 1px solid rgba(26,140,255,0.12);
-            box-shadow: 0 4px 24px rgba(26,140,255,0.08);
-        }
-        .service-card:nth-child(2):hover {
-            box-shadow: 0 10px 40px rgba(26,140,255,0.16);
-        }
-
-        /* 放射考试网：浅蓝渐变 */
-        .service-card:nth-child(3) {
-            background: linear-gradient(135deg, #f5faff 0%, #edf5ff 60%, #f8fbff 100%);
-            border: 1px solid rgba(90,180,255,0.14);
-            box-shadow: 0 4px 24px rgba(90,180,255,0.08);
-        }
-        .service-card:nth-child(3):hover {
-            box-shadow: 0 10px 40px rgba(90,180,255,0.16);
-        }
-
-        /* 左侧粗渐变色条 */
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            border-radius: 18px 0 0 18px;
-        }
-        .service-card--promo::before { background: linear-gradient(180deg, #ff4d4f, #ff8a3d); }
-        .service-card:nth-child(2)::before { background: linear-gradient(180deg, #1a8cff, #5bb5ff); }
-        .service-card:nth-child(3)::before { background: linear-gradient(180deg, #5bb5ff, #a0d4ff); }
-
-        /* 右上角装饰圆点 */
-        .service-card::after {
-            content: '';
-            position: absolute;
-            top: -15px;
-            right: -15px;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            opacity: 0.08;
-        }
-        .service-card--promo::after { background: #ff4d4f; opacity: 0.12; }
-        .service-card:nth-child(2)::after { background: #1a8cff; }
-        .service-card:nth-child(3)::after { background: #5bb5ff; }
-
-        /* 图标 */
-        .service-card .card-icon {
-            width: 58px;
-            height: 58px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-        .service-card--promo .card-icon {
-            background: linear-gradient(145deg, #ffe1d8, #fff1ec);
-            box-shadow: 0 4px 16px rgba(255,77,79,0.25);
-        }
-        .service-card:nth-child(2) .card-icon {
-            background: linear-gradient(145deg, #d5edff, #e8f5ff);
-            box-shadow: 0 4px 16px rgba(26,140,255,0.18);
-        }
-        .service-card:nth-child(3) .card-icon {
-            background: linear-gradient(145deg, #e5f3ff, #f0f8ff);
-            box-shadow: 0 4px 16px rgba(90,180,255,0.18);
-        }
-
-        .card-body {
-            flex: 1;
-            min-width: 0;
-        }
-
-        /* 卡片头部：平台名 + 价格徽章 */
-        .card-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            gap: 8px;
-        }
-
-        .card-name-wrap {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-        }
-
-        .card-name-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-        .service-card--promo .card-name-dot { background: #ff4d4f; box-shadow: 0 0 6px rgba(255,77,79,0.5); }
-        .service-card:nth-child(2) .card-name-dot { background: #1a8cff; box-shadow: 0 0 6px rgba(26,140,255,0.4); }
-        .service-card:nth-child(3) .card-name-dot { background: #5bb5ff; box-shadow: 0 0 6px rgba(91,181,255,0.4); }
-
-        .card-name {
-            font-size: 15px;
-            font-weight: 700;
-            color: #1a3a5c;
-        }
-
-        /* 华医网降价横幅 */
-        .promo-ribbon {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 34px;
-            background: linear-gradient(90deg, #ff4d4f, #ff7a3d);
-            color: #fff;
-            font-size: 13px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            box-shadow: 0 2px 10px rgba(255,77,79,0.35);
-            z-index: 1;
-        }
-
-        .promo-ribbon .ribbon-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.25);
-            font-size: 13px;
-            animation: dropBounce 1.2s ease-in-out infinite;
-        }
-
-        @keyframes dropBounce {
-            0%, 100% { transform: translateY(-1px); }
-            50% { transform: translateY(2px); }
-        }
-
-        /* 卡片图标上的降价角标 */
-        .card-icon--promo {
-            position: relative;
-        }
-        .card-icon--promo .icon-drop {
-            position: absolute;
-            top: -9px;
-            right: -9px;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #ff4d4f, #ff7a3d);
-            color: #fff;
-            font-size: 15px;
-            font-weight: 900;
-            line-height: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #fff;
-            box-shadow: 0 2px 8px rgba(255,77,79,0.5);
-            animation: dropBounce 1.2s ease-in-out infinite;
-        }
-
-        /* 价格徽章 */
-        .card-price-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 2px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 800;
-            flex-shrink: 0;
-        }
-        .service-card--promo .card-price-badge {
-            gap: 6px;
-            padding: 4px 12px;
-            background: linear-gradient(135deg, #ff4d4f, #ff7a3d);
-            color: #fff;
-            box-shadow: 0 3px 10px rgba(255,77,79,0.4);
-        }
-        .card-price-badge .price-original {
-            font-size: 11px;
-            font-weight: 600;
-            text-decoration: line-through;
-            opacity: 0.8;
-        }
-        .card-price-badge .price-now {
-            font-size: 15px;
-        }
-        .card-price-badge .price-now .price-unit {
-            font-size: 11px;
-            font-weight: 600;
-        }
-        .service-card:nth-child(2) .card-price-badge {
-            background: linear-gradient(135deg, #0d4f8c, #1a6fc4);
-            color: #fff;
-            box-shadow: 0 3px 10px rgba(13,79,140,0.3);
-        }
-        .service-card:nth-child(3) .card-price-badge {
-            background: linear-gradient(135deg, #0d4f8c, #1a6fc4);
-            color: #fff;
-            box-shadow: 0 3px 10px rgba(13,79,140,0.3);
-        }
-
-        /* 问题描述 */
-        .card-problem {
-            font-size: 12px;
-            color: #5a6a80;
-            line-height: 1.6;
-            margin-bottom: 10px;
-            position: relative;
-            padding-left: 12px;
-        }
-        .card-problem::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 6px;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            opacity: 0.5;
-        }
-        .service-card--promo .card-problem::before { background: #ff4d4f; }
-        .service-card:nth-child(2) .card-problem::before { background: #1a8cff; }
-        .service-card:nth-child(3) .card-problem::before { background: #5bb5ff; }
-
-        /* 标签组 */
-        .card-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .card-tag {
-            font-size: 11px;
-            padding: 3px 11px;
-            border-radius: 20px;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-        }
-        .service-card .card-tag {
-            background: rgba(22,140,60,0.08);
-            color: #16a83c;
-            border: 1px solid rgba(22,140,60,0.18);
-        }
-        .service-card--promo .card-tag--promo {
-            background: rgba(255,77,79,0.10);
-            color: #ff4d4f;
-            border: 1px solid rgba(255,77,79,0.28);
-        }
-
-        /* 流程图 */
-        .flow-section {
-            padding: 35px 20px 20px;
-            background: #fff;
-        }
-
-        .flow-steps {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 0 5px;
-        }
-
-        .flow-step {
-            text-align: center;
-            flex: 1;
-            position: relative;
-        }
-
-        .flow-step .step-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #e8f4fd, #d0e8f9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin: 0 auto 10px;
-            border: 2px solid rgba(13,79,140,0.15);
-        }
-
-        .flow-step .step-title {
-            font-size: 13px;
-            font-weight: 600;
-            color: #1a3a5c;
-            margin-bottom: 3px;
-        }
-
-        .flow-step .step-desc {
-            font-size: 11px;
-            color: #999;
-        }
-
-        .flow-step:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            top: 28px;
-            right: -50%;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, #b8d8f0, #d0e8f9);
-            z-index: 0;
-        }
-
-        .flow-step .step-icon {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* 服务承诺 */
-        .promise-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        .promise-item {
-            background: #fff;
-            border-radius: 16px;
-            padding: 22px 15px;
-            text-align: center;
-            box-shadow: 0 3px 15px rgba(13,79,140,0.05);
-            border: 1px solid rgba(13,79,140,0.06);
-            transition: transform 0.2s;
-        }
-
-        .promise-item:hover {
-            transform: translateY(-2px);
-        }
-
-        .promise-item .promise-icon {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-
-        .promise-item .promise-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: #1a3a5c;
-            margin-bottom: 4px;
-        }
-
-        .promise-item .promise-desc {
-            font-size: 12px;
-            color: #999;
-        }
-
-        /* 功能介绍 */
-        .intro-box {
-            background: #fff;
-            border-radius: 20px;
-            padding: 28px 20px;
-            margin: 0 20px 0;
-            box-shadow: 0 4px 20px rgba(13,79,140,0.07);
-            border: 1px solid rgba(13,79,140,0.07);
-        }
-
-        .intro-box .intro-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #0d4f8c;
-            text-align: center;
-            margin-bottom: 18px;
-        }
-
-        .intro-box .intro-headline {
-            font-size: 15px;
-            color: #444;
-            margin-bottom: 14px;
-            line-height: 1.8;
-            text-align: center;
-        }
-
-        .intro-box .intro-list {
-            list-style: none;
-        }
-
-        .intro-box .intro-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin-bottom: 12px;
-            font-size: 14px;
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .intro-box .intro-list li:last-child {
-            margin-bottom: 0;
-        }
-
-        .intro-box .intro-list .bullet {
-            color: #0d4f8c;
-            font-weight: 700;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .intro-box .intro-footer {
-            text-align: center;
-            margin-top: 18px;
-            font-size: 15px;
-            color: #1a3a5c;
-            font-weight: 500;
-        }
-
-        .intro-box .intro-footer .arrow {
-            color: #0d4f8c;
-            font-weight: 700;
-        }
-
-        /* 微信客服区域 */
-        .contact-section {
-            padding: 35px 20px 25px;
-            background: #fff;
-        }
-
-        .contact-card {
-            background: linear-gradient(135deg, #f0f5ff, #e8f0fe);
-            border-radius: 20px;
-            padding: 30px 20px;
-            text-align: center;
-            border: 1px solid rgba(13,79,140,0.1);
-        }
-
-        .contact-card .contact-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-
-        .contact-card .contact-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #1a3a5c;
-            margin-bottom: 5px;
-        }
-
-        .contact-card .contact-desc {
-            font-size: 13px;
-            color: #888;
-            margin-bottom: 20px;
-        }
-
-        .contact-card .qr-image {
-            width: 180px;
-            height: 180px;
-            border-radius: 12px;
-            margin: 0 auto 15px;
-            display: block;
-            box-shadow: 0 4px 16px rgba(13,79,140,0.15);
-            border: 3px solid #fff;
-        }
-
-        .contact-card .contact-hint {
-            font-size: 12px;
-            color: #0d4f8c;
-            font-weight: 500;
-        }
-
-        .contact-btn {
-            display: block;
-            width: 220px;
-            margin: 14px auto 0;
-            padding: 13px 0;
-            background: linear-gradient(135deg, #0a3a6e, #1a6fc4);
-            color: #fff;
-            font-size: 16px;
-            font-weight: 700;
-            border-radius: 30px;
-            text-align: center;
-            text-decoration: none;
-            letter-spacing: 4px;
-            box-shadow: 0 4px 16px rgba(10, 58, 110, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .contact-btn:hover {
-            background: linear-gradient(135deg, #0a4f94, #1e8af0);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(10, 58, 110, 0.5);
-        }
-
-        /* 底部 */
-        .footer {
-            background: linear-gradient(135deg, #0a1628, #1a3a5c);
-            color: rgba(255,255,255,0.5);
-            padding: 30px 20px;
-            text-align: center;
-            font-size: 12px;
-        }
-
-        .footer .footer-slogan {
-            font-size: 16px;
-            font-weight: 600;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 8px;
-            letter-spacing: 2px;
-        }
-
-        /* 分隔装饰 */
-        .wave-divider {
-            height: 40px;
-            background: #fff;
-            position: relative;
-        }
-
-        .wave-divider::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 40px;
-            background: #f0f5ff;
-            clip-path: ellipse(55% 100% at 50% 0%);
-        }
-
-        .wave-divider-dark {
-            height: 40px;
-            background: #f0f5ff;
-            position: relative;
-        }
-
-        .wave-divider-dark::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 40px;
-            background: #fff;
-            clip-path: ellipse(55% 100% at 50% 0%);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>华医网学习助手</title>
+<meta name="description" content="华医网等三大平台学习助手，全程托管、省心省力。扫码添加微信客服立即咨询办理。">
+
+<!-- 百度统计（沿用原版） -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d10d2567d18411747f910ce76cd0412a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script>
+  var CONFIG = {
+    // 微信客服链接（与 v1 的「立即咨询」完全相同）
+    CTA_URL: 'https://work.weixin.qq.com/kfid/kfc1d5055e56a9827e3',
+    // 真实已服务人数（如 '1200'）。留空 = 整行不显示。
+    servedCount: '',
+    // 真实合作科室/医院数（如 '30'）。留空 = 不显示。
+    servedDept: ''
+  };
+</script>
+
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    :root {
+        --blue-900: #08203a;
+        --blue-800: #0d4f8c;
+        --blue-600: #1a6fc4;
+        --blue-400: #1a8cff;
+        --ink: #1a3a5c;
+        --muted: #7b8a9c;
+        --bg: #f0f5ff;
+        --hot: #ff4d4f;
+        --hot2: #ff7a3d;
+        --ok: #16a83c;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        background: #e6eefb;
+        color: #333;
+        line-height: 1.6;
+        /* 给底部常驻按钮留出空间，避免最后一段内容被压住 */
+        padding-bottom: 88px;
+        padding-bottom: calc(88px + env(safe-area-inset-bottom));
+    }
+
+    .wrap { max-width: 640px; margin: 0 auto; background: var(--bg); min-height: 100vh; position: relative; overflow: hidden; }
+
+    /* ==================== 首屏 ==================== */
+    .hero {
+        background: linear-gradient(150deg, #0a1628 0%, #143a63 45%, #0d4f8c 100%);
+        color: #fff;
+        padding: 34px 22px 76px;
+        position: relative;
+        overflow: hidden;
+    }
+    .hero::before {
+        content: '';
+        position: absolute; top: -40%; left: -20%; width: 140%; height: 140%;
+        background: radial-gradient(circle at 28% 30%, rgba(26,140,255,.22) 0%, transparent 55%),
+                    radial-gradient(circle at 78% 68%, rgba(255,255,255,.08) 0%, transparent 45%);
+        pointer-events: none;
+    }
+    .hero > * { position: relative; z-index: 1; }
+
+    .eyebrow {
+        display: inline-block;
+        font-size: 12px; letter-spacing: .5px; font-weight: 600;
+        color: #bcd8f5;
+        background: rgba(255,255,255,.12);
+        border: 1px solid rgba(255,255,255,.18);
+        border-radius: 999px;
+        padding: 5px 12px;
+        margin-bottom: 14px;
+    }
+
+    .hero h1 {
+        font-size: 25px; font-weight: 800; line-height: 1.35; letter-spacing: .5px;
+    }
+    .hero h1 em { font-style: normal; color: #ffd86b; }
+
+    .hero .lede {
+        margin-top: 10px; font-size: 14px; color: rgba(255,255,255,.82); line-height: 1.7;
+    }
+
+    /* 价格块：原价 → 活动价 → 条件 */
+    .price-row {
+        margin-top: 18px;
+        display: flex; align-items: center; flex-wrap: wrap; gap: 10px;
+        background: rgba(255,255,255,.09);
+        border: 1px solid rgba(255,255,255,.16);
+        border-radius: 16px;
+        padding: 14px 16px;
+    }
+    .price-old { font-size: 13px; color: rgba(255,255,255,.6); text-decoration: line-through; }
+    .price-new { font-size: 34px; font-weight: 900; color: #ffd86b; line-height: 1; }
+    .price-new small { font-size: 14px; font-weight: 700; margin-left: 2px; }
+    .price-cond {
+        font-size: 12px; font-weight: 700; color: #ffd0b0;
+        background: rgba(255,122,61,.18);
+        border: 1px solid rgba(255,122,61,.45);
+        border-radius: 999px; padding: 4px 10px;
+    }
+
+    /* 首屏主按钮 */
+    .btn-main {
+        display: block; width: 100%;
+        margin-top: 18px;
+        padding: 16px 0;
+        background: linear-gradient(135deg, var(--hot) 0%, var(--hot2) 100%);
+        color: #fff; font-size: 17px; font-weight: 800; letter-spacing: 1px;
+        text-align: center; text-decoration: none;
+        border-radius: 999px;
+        box-shadow: 0 8px 24px rgba(255,77,79,.42);
+        animation: breathe 2.6s ease-in-out infinite;
+    }
+    @keyframes breathe {
+        0%, 100% { box-shadow: 0 8px 24px rgba(255,77,79,.42); }
+        50% { box-shadow: 0 10px 30px rgba(255,77,79,.62); }
+    }
+
+    /* 点了之后会发生什么 —— 冷用户最需要的一句 */
+    .next-step {
+        margin-top: 12px; text-align: center; font-size: 12.5px; color: rgba(255,255,255,.72);
+        line-height: 1.7;
+    }
+    .next-step b { color: #fff; font-weight: 700; }
+
+    .risk-free {
+        margin-top: 10px; text-align: center; font-size: 12px; color: rgba(255,255,255,.6);
+    }
+    .risk-free span { color: #9fe3b0; font-weight: 600; }
+
+    /* 社会证明：有真实数字才显示（CONFIG.servedCount 留空则整行隐藏） */
+    .proof {
+        margin-top: 12px; text-align: center; font-size: 12.5px; color: #cfe3f8;
+    }
+    .proof b { color: #ffd86b; font-weight: 800; }
+
+    /* ==================== 事实条（压住首屏底边） ==================== */
+    .facts {
+        display: flex; justify-content: space-around;
+        background: #fff;
+        margin: -58px 18px 0;
+        padding: 16px 8px;
+        border-radius: 16px;
+        box-shadow: 0 6px 24px rgba(13,79,140,.14);
+        position: relative; z-index: 2;
+    }
+    .fact { text-align: center; flex: 1; position: relative; }
+    .fact + .fact::before {
+        content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+        width: 1px; height: 26px; background: rgba(13,79,140,.1);
+    }
+    .fact .n { font-size: 16px; font-weight: 800; color: var(--blue-800); }
+    .fact .l { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* ==================== 通用区块 ==================== */
+    .section { padding: 34px 20px 6px; }
+    .h2 { font-size: 19px; font-weight: 800; color: var(--blue-800); text-align: center; }
+    .h2::after {
+        content: ''; display: block; width: 40px; height: 3px; border-radius: 2px;
+        background: linear-gradient(90deg, var(--blue-800), var(--blue-400));
+        margin: 8px auto 0;
+    }
+    .sub { font-size: 13px; color: var(--muted); text-align: center; margin-top: 8px; }
+
+    /* ==================== 价格卡 ==================== */
+    .plans { margin-top: 18px; display: flex; flex-direction: column; gap: 12px; }
+    .plan {
+        border-radius: 16px; padding: 18px 16px 16px;
+        display: flex; align-items: flex-start; gap: 14px;
+        position: relative; overflow: hidden;
+        border: 1px solid rgba(26,140,255,.14);
+        background: linear-gradient(135deg, #ffffff 0%, #f6fbff 100%);
+        box-shadow: 0 4px 20px rgba(26,140,255,.08);
+    }
+    .plan--hot {
+        background: linear-gradient(135deg, #fff7f3 0%, #ffe9e0 55%, #fff5f0 100%);
+        border: 1px solid rgba(255,77,79,.24);
+        box-shadow: 0 6px 24px rgba(255,77,79,.14);
+        padding-top: 42px;
+    }
+    .plan--hot::before {
+        content: ''; position: absolute; top: 0; left: 0; right: 0; height: 30px;
+        background: linear-gradient(90deg, var(--hot), var(--hot2));
+    }
+    .plan-ribbon {
+        position: absolute; top: 0; left: 0; right: 0; height: 30px;
+        display: flex; align-items: center; justify-content: center; gap: 6px;
+        color: #fff; font-size: 12.5px; font-weight: 800; letter-spacing: .5px;
+    }
+    .plan-icon {
+        flex: 0 0 auto; width: 50px; height: 50px; border-radius: 14px;
+        background: linear-gradient(145deg, #e5f3ff, #f4faff);
+        display: flex; align-items: center; justify-content: center; font-size: 24px;
+        box-shadow: 0 3px 12px rgba(13,79,140,.1);
+    }
+    .plan--hot .plan-icon { background: linear-gradient(145deg, #ffe1d8, #fff1ec); }
+    .plan-body { flex: 1; min-width: 0; }
+    .plan-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .plan-name { font-size: 15px; font-weight: 800; color: var(--ink); }
+    .plan-price {
+        flex-shrink: 0; border-radius: 999px; padding: 4px 11px;
+        font-size: 13px; font-weight: 800; color: #fff;
+        background: linear-gradient(135deg, #0d4f8c, #1a6fc4);
+    }
+    .plan--hot .plan-price { background: linear-gradient(135deg, var(--hot), var(--hot2)); display: inline-flex; align-items: center; gap: 5px; }
+    .plan-price .was { font-size: 11px; font-weight: 600; text-decoration: line-through; opacity: .8; }
+    .plan-price .now { font-size: 15px; }
+    .plan-why { font-size: 12.5px; color: #5a6a80; margin-top: 6px; }
+    .plan-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+    .plan-tag {
+        font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px;
+        color: var(--ok); background: rgba(22,168,60,.08); border: 1px solid rgba(22,168,60,.2);
+    }
+    .plan-tag--hot { color: var(--hot); background: rgba(255,77,79,.1); border-color: rgba(255,77,79,.28); }
+
+    /* ==================== 常见疑虑 ==================== */
+    .faq { margin-top: 18px; display: flex; flex-direction: column; gap: 10px; }
+    .qa { background: #fff; border-radius: 14px; padding: 14px 16px; box-shadow: 0 3px 16px rgba(13,79,140,.05); }
+    .qa .q { font-size: 14px; font-weight: 700; color: var(--ink); display: flex; gap: 8px; }
+    .qa .q i { font-style: normal; color: var(--blue-400); font-weight: 800; flex-shrink: 0; }
+    .qa .a { font-size: 13px; color: #666; margin-top: 6px; padding-left: 18px; line-height: 1.7; }
+    .qa .a b { color: #d14022; }
+
+    /* ==================== 联系区 ==================== */
+    .contact { padding: 34px 20px 26px; }
+    .contact-card {
+        background: linear-gradient(135deg, #f0f5ff, #e8f0fe);
+        border-radius: 20px; padding: 26px 20px; text-align: center;
+        border: 1px solid rgba(13,79,140,.1);
+    }
+    .contact-card .t { font-size: 17px; font-weight: 800; color: var(--ink); }
+    .contact-card .d { font-size: 13px; color: #888; margin-top: 6px; }
+    .qr-image {
+        width: 178px; height: 178px; border-radius: 12px; display: block;
+        margin: 18px auto 12px; border: 3px solid #fff;
+        box-shadow: 0 4px 16px rgba(13,79,140,.15);
+    }
+    .qr-hint { font-size: 12px; color: var(--blue-800); font-weight: 600; }
+    .btn-ghost {
+        display: block; width: 220px; margin: 14px auto 0; padding: 13px 0;
+        background: linear-gradient(135deg, #0a3a6e, #1a6fc4);
+        color: #fff; font-size: 15px; font-weight: 700; letter-spacing: 3px;
+        text-align: center; text-decoration: none; border-radius: 999px;
+        box-shadow: 0 4px 16px rgba(10,58,110,.35);
+    }
+
+    /* ==================== 页脚 ==================== */
+    .footer {
+        background: linear-gradient(135deg, #0a1628, #1a3a5c);
+        color: rgba(255,255,255,.45);
+        padding: 26px 20px; text-align: center; font-size: 12px;
+    }
+    .footer .slogan { font-size: 15px; font-weight: 600; color: rgba(255,255,255,.7); letter-spacing: 2px; margin-bottom: 6px; }
+
+    /* ==================== 常驻底部按钮 ==================== */
+    .sticky {
+        position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+        background: rgba(255,255,255,.96);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid rgba(13,79,140,.1);
+        box-shadow: 0 -4px 20px rgba(13,79,140,.1);
+        padding: 10px 16px;
+        padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    }
+    .sticky-inner {
+        max-width: 640px; margin: 0 auto;
+        display: flex; align-items: center; gap: 12px;
+    }
+    .sticky-price { flex: 0 0 auto; line-height: 1.15; }
+    .sticky-price .p { font-size: 20px; font-weight: 900; color: var(--hot); }
+    .sticky-price .o { font-size: 11px; color: var(--muted); text-decoration: line-through; }
+    .btn-sticky {
+        flex: 1; padding: 13px 0; text-align: center; text-decoration: none;
+        background: linear-gradient(135deg, var(--hot), var(--hot2));
+        color: #fff; font-size: 16px; font-weight: 800; letter-spacing: 1px;
+        border-radius: 999px;
+        box-shadow: 0 6px 18px rgba(255,77,79,.38);
+    }
+</style>
 </head>
 <body>
+<div class="wrap">
 
-    <!-- 顶部 Banner -->
-    <div class="banner">
-        <h1>🚀 学习助手 · 考试轻松通过</h1>
-        <p class="tagline">华医网 · 放射考试网 · 陕西继续教育</p>
-        <div class="hero-image">
-            <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-                <rect x="15" y="30" width="40" height="55" rx="4" fill="#1a8cff" opacity="0.9"/>
-                <rect x="18" y="33" width="34" height="49" rx="2" fill="#fff" opacity="0.3"/>
-                <line x1="22" y1="42" x2="48" y2="42" stroke="#fff" stroke-width="2" opacity="0.5"/>
-                <line x1="22" y1="50" x2="44" y2="50" stroke="#fff" stroke-width="2" opacity="0.4"/>
-                <line x1="22" y1="58" x2="46" y2="58" stroke="#fff" stroke-width="2" opacity="0.3"/>
-                <path d="M70 25 L70 50 Q70 65 85 65 Q100 65 100 50 L100 25 Z" fill="#ffd700" opacity="0.9"/>
-                <rect x="80" y="65" width="10" height="8" rx="1" fill="#e6b800"/>
-                <rect x="74" y="73" width="22" height="4" rx="2" fill="#e6b800"/>
-                <path d="M70 30 L62 30 Q58 30 58 35 L58 38 Q58 45 65 47" fill="none" stroke="#ffd700" stroke-width="3" opacity="0.8"/>
-                <path d="M100 30 L108 30 Q112 30 112 35 L112 38 Q112 45 105 47" fill="none" stroke="#ffd700" stroke-width="3" opacity="0.8"/>
-                <text x="85" y="48" text-anchor="middle" fill="#e6b800" font-size="14" font-weight="bold">★</text>
-                <circle cx="55" cy="95" r="15" fill="#4CAF50" opacity="0.9"/>
-                <path d="M47 95 L53 101 L63 89" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+    <!-- ============ 首屏：3 秒讲完 + 一个按钮 ============ -->
+    <div class="hero">
+        <span class="eyebrow">华医网 · 陕西继续教育 · 放射考试网</span>
+        <h1>华医网的学习和考试<br><em>交给我们就行</em></h1>
+        <p class="lede">临床太忙、没时间刷课？我们全程托管，帮你高效完成视频课程与考试，学分按时到手。</p>
+
+        <div class="price-row">
+            <span class="price-old">原价 ¥30</span>
+            <span class="price-new">¥18<small>/人</small></span>
+            <span class="price-cond">一人助力 · 立省 ¥12</span>
         </div>
+
+        <a class="btn-main" id="cta-hero" href="#" target="_blank" rel="noopener">立即咨询 · 领 ¥18 活动价</a>
+
+        <p class="next-step">
+            点击后咨询微信客服
+        </p>
+
     </div>
 
-    <!-- 统计数字 -->
-    <div class="stats-bar">
-        <div class="stat-item">
-            <div class="stat-number">3大</div>
-            <div class="stat-label">服务网站</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number">95%+</div>
-            <div class="stat-label">解析准确率</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number">24h</div>
-            <div class="stat-label">随时可用</div>
-        </div>
-    </div>
+    
 
-    <!-- 服务范围 -->
+    <!-- ============ 三大平台（沿用原版信息） ============ -->
     <div class="section">
-        <div class="section-title">三大平台学习助手</div>
-        <div class="section-subtitle">效率提升10倍，考试更有信心</div>
+        <div class="h2">三大平台学习助手</div>
+       
 
-        <div class="service-cards-wrap">
-            <div class="service-card service-card--promo">
-                <div class="promo-ribbon">
-                    <span class="ribbon-icon">↓</span>
-                    <span>限时降价 · 立省 ¥12</span>
-                </div>
-                <div class="card-icon card-icon--promo">🏥<span class="icon-drop">↓</span></div>
-                <div class="card-body">
-                    <div class="card-header">
-                        <div class="card-name-wrap">
-                            <span class="card-name-dot"></span>
-                            <span class="card-name">华医网</span>
-                        </div>
-                        <span class="card-price-badge">
-                            <span class="price-original">¥30</span>
-                            <span class="price-now">¥18<span class="price-unit">/人</span></span>
-                        </span>
+        <div class="plans">
+            <div class="plan plan--hot">
+                <div class="plan-ribbon"><span>↓</span><span>限时降价 · 立省 ¥12</span></div>
+                <div class="plan-icon">🏥</div>
+                <div class="plan-body">
+                    <div class="plan-head">
+                        <span class="plan-name">华医网</span>
+                        <span class="plan-price"><span class="was">¥30</span><span class="now">¥18</span>/人</span>
                     </div>
-                    <div class="card-problem">临床太忙，没有时间刷课</div>
-                    <div class="card-tags">
-                        <span class="card-tag card-tag--promo">降价特惠</span>
-                        <span class="card-tag">省心高效</span>
+                    <div class="plan-why">临床太忙，没有时间刷课</div>
+                    <div class="plan-tags">
+                        <span class="plan-tag plan-tag--hot">本月活动价</span>
+                        <span class="plan-tag">省心高效</span>
                     </div>
                 </div>
             </div>
 
-            <div class="service-card">
-                <div class="card-icon">📖</div>
-                <div class="card-body">
-                    <div class="card-header">
-                        <div class="card-name-wrap">
-                            <span class="card-name-dot"></span>
-                            <span class="card-name">陕西继续教育</span>
-                        </div>
-                        <span class="card-price-badge">¥20/人</span>
+            <div class="plan">
+                <div class="plan-icon">📖</div>
+                <div class="plan-body">
+                    <div class="plan-head">
+                        <span class="plan-name">陕西继续教育</span>
+                        <span class="plan-price">¥20/人</span>
                     </div>
-                    <div class="card-problem">学分要求多，总是为凑不够发愁</div>
-                    <div class="card-tags">
-                        <span class="card-tag">省心高效</span>
-                        <span class="card-tag">快速完成</span>
+                    <div class="plan-why">学分要求多，总是为凑不够发愁</div>
+                    <div class="plan-tags">
+                        <span class="plan-tag">省心高效</span>
+                        <span class="plan-tag">快速完成</span>
                     </div>
                 </div>
             </div>
 
-            <div class="service-card">
-                <div class="card-icon">☢️</div>
-                <div class="card-body">
-                    <div class="card-header">
-                        <div class="card-name-wrap">
-                            <span class="card-name-dot"></span>
-                            <span class="card-name">放射考试网</span>
-                        </div>
-                        <span class="card-price-badge">¥50/人</span>
+            <div class="plan">
+                <div class="plan-icon">☢️</div>
+                <div class="plan-body">
+                    <div class="plan-head">
+                        <span class="plan-name">放射考试网</span>
+                        <span class="plan-price">¥50/人</span>
                     </div>
-                    <div class="card-problem">放射考试多，通过率低压力大</div>
-                    <div class="card-tags">
-                        <span class="card-tag">省心高效</span>
-                        <span class="card-tag">快速完成</span>
+                    <div class="plan-why">放射考试多，通过率低压力大</div>
+                    <div class="plan-tags">
+                        <span class="plan-tag">省心高效</span>
+                        <span class="plan-tag">快速完成</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="wave-divider" style="margin-top: -1px;"></div>
-
-    <!-- 功能介绍 -->
-    <div class="section" style="background: #f0f5ff; padding-top: 20px;">
-        <div class="section-title">功能介绍</div>
-        <div class="section-subtitle">有了学习助手，一切变得轻松简单</div>
-        <div class="intro-box">
-            <div class="intro-headline">还在为每年课程学分发愁？换一种更高效的方式吧</div>
-            <ul class="intro-list">
-                <li>
-                    <span class="bullet">✗</span>
-                    <span>课程太多，没时间看</span>
-                </li>
-                <li>
-                    <span class="bullet">✗</span>
-                    <span>每个视频都要考试，心里没底</span>
-                </li>
-                <li>
-                    <span class="bullet">✗</span>
-                    <span>白天上班还要刷课，时间不允许</span>
-                </li>
-            </ul>
-            <div class="intro-footer">
-                <span class="arrow">有了学习助手，帮你高效完成视频课程、轻松获取学分。</span>
+    <!-- ============ 常见疑虑（冷用户真正卡住的几个问题） ============ -->
+    <div class="section">
+        <div class="h2">你可能想问</div>
+        <div class="faq">
+            
+            <div class="qa">
+                <div class="q"><i>Q</i>不放心怎么办？</div>
+                <div class="a">付款后、尚未开始服务前，可随时联系客服退款；对服务内容有疑问也可以先问清楚再决定。</div>
+            </div>
+            <div class="qa">
+                <div class="q"><i>Q</i>我的信息会不会外泄？</div>
+                <div class="a">学习账号信息仅用于完成你在对应平台的课程与考试，不作他用。</div>
+            </div>
+            <div class="qa">
+                <div class="q"><i>Q</i>课程什么时候完成？</div>
+                <div class="a">1~2周时间，客服会同步进度；期间任何疑问随时问客服。</div>
             </div>
         </div>
     </div>
 
-    <!-- 服务流程 -->
-    <div class="flow-section">
-        <div class="section-title">服务流程</div>
-        <div class="section-subtitle">简单三步，轻松搞定</div>
-        <div class="flow-steps">
-            <div class="flow-step">
-                <div class="step-icon">💬</div>
-                <div class="step-title">扫码获取</div>
-                <div class="step-desc">添加客服微信</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-icon">📋</div>
-                <div class="step-title">说明需求</div>
-                <div class="step-desc">告诉我们您的平台</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-icon">✅</div>
-                <div class="step-title">轻松完成</div>
-                <div class="step-desc">省心省力坐等结果</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- <div class="wave-divider-dark"></div> -->
-
-    <!-- 
-    <div class="section" style="background: #fff; padding-top: 25px;">
-        <div class="section-title">六大核心保障</div>
-        <div class="section-subtitle">省心高效，值得信赖</div>
-        <div class="promise-grid">
-            <div class="promise-item">
-                <div class="promise-icon">⚡</div>
-                <div class="promise-title">效率提升</div>
-                <div class="promise-desc">省心省力，无需您动手</div>
-            </div>
-            <div class="promise-item">
-                <div class="promise-icon">📚</div>
-                <div class="promise-title">全面覆盖</div>
-                <div class="promise-desc">三大平台主流科目一站式搞定</div>
-            </div>
-            <div class="promise-item">
-                <div class="promise-icon">🚀</div>
-                <div class="promise-title">快速完成</div>
-                <div class="promise-desc">高效完成，不浪费时间</div>
-            </div>
-            <div class="promise-item">
-                <div class="promise-icon">🔒</div>
-                <div class="promise-title">隐私安全</div>
-                <div class="promise-desc">信息严格加密，安全可靠</div>
-            </div>
-            <div class="promise-item">
-                <div class="promise-icon">🔄</div>
-                <div class="promise-title">题库更新</div>
-                <div class="promise-desc">持续更新最新题库</div>
-            </div>
-            <div class="promise-item">
-                <div class="promise-icon">💬</div>
-                <div class="promise-title">专属客服</div>
-                <div class="promise-desc">全程跟进，有问必答</div>
-            </div>
-        </div>
-    </div>
-   
-    <div class="wave-divider"></div>
-    服务承诺 -->
-    <!-- 微信客服 -->
-    <div class="contact-section">
-        <div class="section-title">联系我们</div>
-        <div class="section-subtitle">扫码添加微信客服，获取专属学习方案</div>
+    <!-- ============ 联系区（二维码与按钮同 v1，均跳微信客服） ============ -->
+    <div class="contact">
         <div class="contact-card">
+            <div class="t">扫码咨询微信客服</div>
             <img src="qrcode.png" alt="微信客服二维码" class="qr-image">
-            <div class="contact-hint">长按识别二维码添加</div>
-            <a href="https://work.weixin.qq.com/kfid/kfc1d5055e56a9827e3" target="_blank" class="contact-btn">立即咨询</a>
+            <div class="qr-hint">长按识别二维码</div>
+            
         </div>
     </div>
 
+    
 
-    <!-- 底部 -->
-    <div class="footer">
-        <div class="footer-slogan">学习助手 · 省心高效 · 值得信赖</div>
-        <p>© 2026 学习助手平台</p>
+</div>
+
+<!-- 常驻底部按钮：v1 的按钮在最底部，滚到哪儿都得往下拉；这条让"咨询"永远在手指边 -->
+<div class="sticky">
+    <div class="sticky-inner">
+        <div class="sticky-price">
+            <div class="p">¥18</div>
+            <div class="o">原价 ¥30</div>
+        </div>
+        <a class="btn-sticky" id="cta-sticky" href="#" target="_blank" rel="noopener">立即咨询 · 领活动价</a>
     </div>
+</div>
 
-    <!-- 绕过CDN缓存：每次访问自动给图片追加时间戳 -->
-    <script>
+<script>
+    // ---------- 三处 CTA 统一从 CONFIG 取链接，避免以后改链接漏改 ----------
+    // 每个入口都做了存在性判断：将来删掉某个按钮不会抛错（只是少一个入口）。
+    ['cta-hero', 'cta-foot', 'cta-sticky'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.href = CONFIG.CTA_URL;
+    });
+
+    // ---------- 社会证明：没有真实数字就不显示（不编造） ----------
+    (function () {
+        var box = document.getElementById('proof');
+        if (!box) return;
+        var parts = [];
+        if (CONFIG.servedCount) parts.push('已服务 <b>' + CONFIG.servedCount + '</b> 位医护人员');
+        if (CONFIG.servedDept) parts.push('<b>' + CONFIG.servedDept + '</b> 个科室正在使用');
+        if (!parts.length) return;
+        box.innerHTML = parts.join(' · ');
+        box.hidden = false;
+    })();
+
+    // ---------- 绕过 CDN 缓存：每次访问给二维码追加时间戳（沿用 v1 做法） ----------
+    (function () {
         var t = Date.now();
-        document.querySelectorAll('img[src*="qrcode"]').forEach(function(img) {
+        document.querySelectorAll('img[src*="qrcode"]').forEach(function (img) {
             img.src = img.src.split('?')[0] + '?v=' + t;
         });
-    </script>
+    })();
+</script>
 
 </body>
 </html>
