@@ -35,7 +35,7 @@
      不展开 —— 以后再加内容也请守住这条。
 
   ⚠️ 上线前必须处理的 3 处（都在下面 CONFIG 里，改一处即可）：
-     CTA_URL      —— 微信客服链接，与 v1 完全一致，未改动。
+     CTA_URL      —— 微信客服链接（含砍价活动渠道参数，2026-10-22 起）。
      servedCount  —— 真实已服务人数；**没有真实数字就留空**，那一行会自动隐藏，不要编。
      servedDept   —— 真实合作科室/医院数，同上。
      （事实条已改成可核实的事实：3 大平台 / 限时砍价 / 全程托管，未沿用 v1 的
@@ -53,8 +53,8 @@
 -->
 <script>
   var CONFIG = {
-    // 微信客服链接（与 v1 的「立即咨询」完全相同）
-    CTA_URL: 'https://work.weixin.qq.com/kfid/kfc1d5055e56a9827e3',
+    // 微信客服链接（含砍价活动渠道参数 scene_param=KANJIA_D1，2026-10-22 起）
+    CTA_URL: 'https://work.weixin.qq.com/kfid/kfc1d5055e56a9827e3?enc_scene=ENC24UMZ4NXEQxYy4sbdZWmkwgqPWF2CE1wBzxGUMb4GiUz&scene_param=KANJIA_D1',
     // 真实已服务人数（如 '1200'）。留空 = 整行不显示。
     servedCount: '',
     // 真实合作科室/医院数（如 '30'）。留空 = 不显示。
@@ -172,11 +172,6 @@
     }
     .next-step b { color: #fff; font-weight: 700; }
 
-    .risk-free {
-        margin-top: 10px; text-align: center; font-size: 12px; color: rgba(255,255,255,.6);
-    }
-    .risk-free span { color: #9fe3b0; font-weight: 600; }
-
     /* 社会证明：有真实数字才显示（CONFIG.servedCount 留空则整行隐藏） */
     .proof {
         margin-top: 12px; text-align: center; font-size: 12.5px; color: #cfe3f8;
@@ -209,8 +204,6 @@
         background: linear-gradient(90deg, var(--blue-800), var(--blue-400));
         margin: 8px auto 0;
     }
-    .sub { font-size: 13px; color: var(--muted); text-align: center; margin-top: 8px; }
-
     /* ==================== 价格卡 ==================== */
     .plans { margin-top: 18px; display: flex; flex-direction: column; gap: 12px; }
     .plan {
@@ -264,7 +257,6 @@
         background: linear-gradient(135deg, #0d4f8c, #1a6fc4);
     }
     .plan--hot .plan-price { background: linear-gradient(135deg, var(--hot), var(--hot2)); display: inline-flex; align-items: center; gap: 5px; }
-    .plan-price .pre { font-size: 11px; font-weight: 600; opacity: .85; }
     .plan-price .now { font-size: 15px; }
     .plan-why { font-size: 12.5px; color: #5a6a80; margin-top: 6px; }
     .plan-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
@@ -297,22 +289,6 @@
         box-shadow: 0 4px 16px rgba(13,79,140,.15);
     }
     .qr-hint { font-size: 12px; color: var(--blue-800); font-weight: 600; }
-    .btn-ghost {
-        display: block; width: 220px; margin: 14px auto 0; padding: 13px 0;
-        background: linear-gradient(135deg, #0a3a6e, #1a6fc4);
-        color: #fff; font-size: 15px; font-weight: 700; letter-spacing: 3px;
-        text-align: center; text-decoration: none; border-radius: 999px;
-        box-shadow: 0 4px 16px rgba(10,58,110,.35);
-    }
-
-    /* ==================== 页脚 ==================== */
-    .footer {
-        background: linear-gradient(135deg, #0a1628, #1a3a5c);
-        color: rgba(255,255,255,.45);
-        padding: 26px 20px; text-align: center; font-size: 12px;
-    }
-    .footer .slogan { font-size: 15px; font-weight: 600; color: rgba(255,255,255,.7); letter-spacing: 2px; margin-bottom: 6px; }
-
     /* ==================== 常驻底部按钮 ==================== */
     .sticky {
         position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
@@ -356,10 +332,7 @@
 
         <a class="btn-main" id="cta-hero" href="#" target="_blank" rel="noopener">立即咨询 · 1 元尝鲜</a>
 
-        <p class="next-step">
-            点击后添加微信客服<br><b>客服会为你说明砍价参与方式</b>
-        </p>
-        <p class="risk-free">付款后、尚未开始服务前，<span>可随时联系客服退款</span></p>
+        <p class="next-step"><b>点一点有惊喜</b></p>
         <p class="proof" id="proof" hidden></p>
     </div>
 
@@ -373,7 +346,6 @@
     <!-- ============ 三大平台（沿用原版信息） ============ -->
     <div class="section">
         <div class="h2">三大平台学习助手</div>
-        <div class="sub">效率提升，考试更有信心</div>
 
         <div class="plans">
             <div class="plan plan--hot">
@@ -382,7 +354,7 @@
                 <div class="plan-body">
                     <div class="plan-head">
                         <span class="plan-name">华医网</span>
-                        <span class="plan-price"><span class="pre">砍价成功</span><span class="now">¥1</span></span>
+                        <span class="plan-price"><span class="now">1 元尝鲜</span></span>
                     </div>
                     <div class="plan-why">临床太忙，没有时间刷课</div>
                     <div class="plan-tags">
@@ -429,12 +401,8 @@
         <div class="h2">你可能想问</div>
         <div class="faq">
             <div class="qa">
-                <div class="q"><i>Q</i>我需要做什么？</div>
-                <div class="a">加客服说明你要办哪个平台（华医网 / 陕西继续教育 / 放射考试网），课程和考试由我们完成，进度客服会同步给你。</div>
-            </div>
-            <div class="qa">
                 <div class="q"><i>Q</i>「1 元尝鲜」怎么参与？活动多久？</div>
-                <div class="a">华医网限时砍价活动：砍价成功后仅需 <b>¥1</b> 即可尝鲜体验课程托管，活动限时进行；砍价的参与方式，加客服后会为你说明。陕西继续教育 ¥20/人、放射考试网 ¥50/人照常服务。</div>
+                <div class="a">华医网限时砍价活动：砍价成功后仅需 <b>¥1</b> 即可尝鲜体验课程托管，活动限时进行；砍价的参与方式，加客服后会为你说明。</div>
             </div>
             <div class="qa">
                 <div class="q"><i>Q</i>不放心怎么办？</div>
@@ -451,22 +419,17 @@
         </div>
     </div>
 
-    <!-- ============ 联系区（二维码与按钮同 v1，均跳微信客服） ============ -->
+    <!-- ============ 联系区（扫码添加人工客服） ============ -->
     <div class="contact">
         <div class="contact-card">
-            <div class="t">扫码添加微信客服</div>
+            <div class="t">不清楚？扫码添加人工客服</div>
             <div class="d">扫码咨询 · 参与限时砍价（1 元尝鲜）</div>
             <img src="qrcode.png" alt="微信客服二维码" class="qr-image">
             <div class="qr-hint">长按识别二维码添加</div>
-            <a class="btn-ghost" id="cta-foot" href="#" target="_blank" rel="noopener">立即咨询</a>
         </div>
     </div>
 
-    <!-- ============ 页脚 ============ -->
-    <div class="footer">
-        <div class="slogan">学习助手 · 省心高效 · 值得信赖</div>
-        <p>© 2026 学习助手平台</p>
-    </div>
+    <!-- 页脚已移除（用户 2026-10-22 要求），联系区之后直接结束 -->
 
 </div>
 
@@ -482,7 +445,7 @@
 </div>
 
 <script>
-    // ---------- 三处 CTA 统一从 CONFIG 取链接，避免以后改链接漏改 ----------
+    // ---------- 各 CTA 统一从 CONFIG 取链接，避免以后改链接漏改 ----------
     // 每个入口都做了存在性判断：将来删掉某个按钮不会抛错（只是少一个入口）。
     ['cta-hero', 'cta-foot', 'cta-sticky'].forEach(function (id) {
         var el = document.getElementById(id);
