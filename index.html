@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>华医网学习助手</title>
-<meta name="description" content="华医网等三大平台学习助手，全程托管、省心省力。扫码添加微信客服立即咨询办理。">
+<title>华医网学习助手 · 限时砍价 1 元尝鲜</title>
+<meta name="description" content="华医网等三大平台学习助手，全程托管、省心省力。限时砍价活动进行中：砍价成功后仅需 ¥1 即可尝鲜体验华医网课程托管。扫码添加微信客服立即咨询参与。">
 
 <!-- 百度统计（沿用原版） -->
 <script>
@@ -17,6 +17,40 @@
     })();
 </script>
 
+<!--
+=====================================================================
+  落地页 v2（原版的排版与文案重构版）
+  · index.html    —— 正式页面（部署用）。**原始版本完整备份在 index-v1.html**，可随时回滚。
+  · index-v2.html —— 上一版副本（¥18 活动版），不再随本文件同步，仅留作对照。
+
+  与 v1 的差别：
+    ① 首屏 3 秒讲完「是什么 / 多少钱 / 现在做什么」，行动按钮放到首屏
+       （v1 的「立即咨询」在页面最底部，第一屏看不到）。
+    ② 补上冷用户最缺的两样：下一步会发生什么（降低不确定性）+ 风险逆转（可退）。
+    ③ 新增「你可能想问」答疑区，并加了常驻底部按钮（手指边永远有入口）。
+
+  ⚠️ 本页只负责讲清「提供哪些服务 + 现在什么活动」，**不解释参与过程**（用户 2026-10-20 明确：
+     过程写长了反而让人嫌麻烦、害怕）。当前活动为「限时砍价 · 1 元尝鲜」：页面只出现活动主题
+     与结果（砍价成功后 ¥1），砍价的步骤 / 助力规则等玩法细节一律由客服在会话里说明，本页
+     不展开 —— 以后再加内容也请守住这条。
+
+  ⚠️ 上线前必须处理的 3 处（都在下面 CONFIG 里，改一处即可）：
+     CTA_URL      —— 微信客服链接，与 v1 完全一致，未改动。
+     servedCount  —— 真实已服务人数；**没有真实数字就留空**，那一行会自动隐藏，不要编。
+     servedDept   —— 真实合作科室/医院数，同上。
+     （事实条已改成可核实的事实：3 大平台 / 限时砍价 / 全程托管，未沿用 v1 的
+       「95%+ 解析准确率」——那个数字对医生没有说服力，反而像随手写的。）
+
+  ⚠️ 文案上刻意没有使用「包过 / 保证通过 / 代考」这类措辞：风险高，而且医生看到这类承诺
+     第一反应是"不靠谱"。用的是与原版一致的「全程托管 · 省心省力 · 高效完成课程」口径。
+
+  ⚠️ 手改本文件请"成对删整块"（每块都有 ============ 开头的注释），不要只删其中几行：
+     · 底部脚本按 id 找 cta-hero / cta-foot / cta-sticky / proof —— 缺了不会报错（已加保护），
+       但那个按钮就消失了；
+     · 首屏底部预留了 76px 空白给事实条压边。事实条若被删掉，脚本会自动把这段空白收窄
+       （.hero--no-facts），所以不会再出现"首屏下方空一大块"。
+=====================================================================
+-->
 <script>
   var CONFIG = {
     // 微信客服链接（与 v1 的「立即咨询」完全相同）
@@ -60,10 +94,12 @@
     .hero {
         background: linear-gradient(150deg, #0a1628 0%, #143a63 45%, #0d4f8c 100%);
         color: #fff;
+        /* 底部 76px 是留给事实条压住首屏下边的；事实条若被删掉，脚本会给它加 .hero--no-facts 收窄 */
         padding: 34px 22px 76px;
         position: relative;
         overflow: hidden;
     }
+    .hero--no-facts { padding-bottom: 34px; }
     .hero::before {
         content: '';
         position: absolute; top: -40%; left: -20%; width: 140%; height: 140%;
@@ -93,7 +129,7 @@
         margin-top: 10px; font-size: 14px; color: rgba(255,255,255,.82); line-height: 1.7;
     }
 
-    /* 价格块：原价 → 活动价 → 条件 */
+    /* 价格块：砍价条件 → 尝鲜价 → 活动 */
     .price-row {
         margin-top: 18px;
         display: flex; align-items: center; flex-wrap: wrap; gap: 10px;
@@ -102,7 +138,7 @@
         border-radius: 16px;
         padding: 14px 16px;
     }
-    .price-old { font-size: 13px; color: rgba(255,255,255,.6); text-decoration: line-through; }
+    .price-note { font-size: 13px; color: rgba(255,255,255,.72); }
     .price-new { font-size: 34px; font-weight: 900; color: #ffd86b; line-height: 1; }
     .price-new small { font-size: 14px; font-weight: 700; margin-left: 2px; }
     .price-cond {
@@ -200,6 +236,18 @@
         display: flex; align-items: center; justify-content: center; gap: 6px;
         color: #fff; font-size: 12.5px; font-weight: 800; letter-spacing: .5px;
     }
+    /* 横幅里的「砍」字圆标 */
+    .plan-ribbon .ribbon-badge {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 18px; height: 18px; border-radius: 50%;
+        background: rgba(255,255,255,.25);
+        font-size: 11px; font-weight: 800;
+        animation: dropBounce 1.2s ease-in-out infinite;
+    }
+    @keyframes dropBounce {
+        0%, 100% { transform: translateY(-1px); }
+        50% { transform: translateY(2px); }
+    }
     .plan-icon {
         flex: 0 0 auto; width: 50px; height: 50px; border-radius: 14px;
         background: linear-gradient(145deg, #e5f3ff, #f4faff);
@@ -216,7 +264,7 @@
         background: linear-gradient(135deg, #0d4f8c, #1a6fc4);
     }
     .plan--hot .plan-price { background: linear-gradient(135deg, var(--hot), var(--hot2)); display: inline-flex; align-items: center; gap: 5px; }
-    .plan-price .was { font-size: 11px; font-weight: 600; text-decoration: line-through; opacity: .8; }
+    .plan-price .pre { font-size: 11px; font-weight: 600; opacity: .85; }
     .plan-price .now { font-size: 15px; }
     .plan-why { font-size: 12.5px; color: #5a6a80; margin-top: 6px; }
     .plan-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
@@ -281,7 +329,7 @@
     }
     .sticky-price { flex: 0 0 auto; line-height: 1.15; }
     .sticky-price .p { font-size: 20px; font-weight: 900; color: var(--hot); }
-    .sticky-price .o { font-size: 11px; color: var(--muted); text-decoration: line-through; }
+    .sticky-price .o { font-size: 11px; color: var(--muted); }
     .btn-sticky {
         flex: 1; padding: 13px 0; text-align: center; text-decoration: none;
         background: linear-gradient(135deg, var(--hot), var(--hot2));
@@ -301,38 +349,44 @@
         <p class="lede">临床太忙、没时间刷课？我们全程托管，帮你高效完成视频课程与考试，学分按时到手。</p>
 
         <div class="price-row">
-            <span class="price-old">原价 ¥30</span>
-            <span class="price-new">¥18<small>/人</small></span>
-            <span class="price-cond">一人助力 · 立省 ¥12</span>
+            <span class="price-note">砍价成功后</span>
+            <span class="price-new">¥1<small>尝鲜</small></span>
+            <span class="price-cond">限时砍价 · 1 元尝鲜</span>
         </div>
 
-        <a class="btn-main" id="cta-hero" href="#" target="_blank" rel="noopener">立即咨询 · 领 ¥18 活动价</a>
+        <a class="btn-main" id="cta-hero" href="#" target="_blank" rel="noopener">立即咨询 · 1 元尝鲜</a>
 
         <p class="next-step">
-            点击后咨询微信客服
+            点击后添加微信客服<br><b>客服会为你说明砍价参与方式</b>
         </p>
-
+        <p class="risk-free">付款后、尚未开始服务前，<span>可随时联系客服退款</span></p>
+        <p class="proof" id="proof" hidden></p>
     </div>
 
-    
+    <!-- ============ 三条可核实的事实（替代原版"95%+ 解析准确率"） ============ -->
+    <div class="facts">
+        <div class="fact"><div class="n">3 大平台</div><div class="l">一个客服全搞定</div></div>
+        <div class="fact"><div class="n">限时砍价</div><div class="l">1 元尝鲜体验</div></div>
+        <div class="fact"><div class="n">全程托管</div><div class="l">不用自己刷课</div></div>
+    </div>
 
     <!-- ============ 三大平台（沿用原版信息） ============ -->
     <div class="section">
         <div class="h2">三大平台学习助手</div>
-       
+        <div class="sub">效率提升，考试更有信心</div>
 
         <div class="plans">
             <div class="plan plan--hot">
-                <div class="plan-ribbon"><span>↓</span><span>限时降价 · 立省 ¥12</span></div>
+                <div class="plan-ribbon"><span class="ribbon-badge">砍</span><span>限时砍价 · 1 元尝鲜</span></div>
                 <div class="plan-icon">🏥</div>
                 <div class="plan-body">
                     <div class="plan-head">
                         <span class="plan-name">华医网</span>
-                        <span class="plan-price"><span class="was">¥30</span><span class="now">¥18</span>/人</span>
+                        <span class="plan-price"><span class="pre">砍价成功</span><span class="now">¥1</span></span>
                     </div>
                     <div class="plan-why">临床太忙，没有时间刷课</div>
                     <div class="plan-tags">
-                        <span class="plan-tag plan-tag--hot">本月活动价</span>
+                        <span class="plan-tag plan-tag--hot">限时砍价</span>
                         <span class="plan-tag">省心高效</span>
                     </div>
                 </div>
@@ -374,7 +428,14 @@
     <div class="section">
         <div class="h2">你可能想问</div>
         <div class="faq">
-            
+            <div class="qa">
+                <div class="q"><i>Q</i>我需要做什么？</div>
+                <div class="a">加客服说明你要办哪个平台（华医网 / 陕西继续教育 / 放射考试网），课程和考试由我们完成，进度客服会同步给你。</div>
+            </div>
+            <div class="qa">
+                <div class="q"><i>Q</i>「1 元尝鲜」怎么参与？活动多久？</div>
+                <div class="a">华医网限时砍价活动：砍价成功后仅需 <b>¥1</b> 即可尝鲜体验课程托管，活动限时进行；砍价的参与方式，加客服后会为你说明。陕西继续教育 ¥20/人、放射考试网 ¥50/人照常服务。</div>
+            </div>
             <div class="qa">
                 <div class="q"><i>Q</i>不放心怎么办？</div>
                 <div class="a">付款后、尚未开始服务前，可随时联系客服退款；对服务内容有疑问也可以先问清楚再决定。</div>
@@ -385,7 +446,7 @@
             </div>
             <div class="qa">
                 <div class="q"><i>Q</i>课程什么时候完成？</div>
-                <div class="a">1~2周时间，客服会同步进度；期间任何疑问随时问客服。</div>
+                <div class="a">按各平台进度安排推进，客服会同步进度；期间任何疑问随时问客服。</div>
             </div>
         </div>
     </div>
@@ -393,14 +454,19 @@
     <!-- ============ 联系区（二维码与按钮同 v1，均跳微信客服） ============ -->
     <div class="contact">
         <div class="contact-card">
-            <div class="t">扫码咨询微信客服</div>
+            <div class="t">扫码添加微信客服</div>
+            <div class="d">扫码咨询 · 参与限时砍价（1 元尝鲜）</div>
             <img src="qrcode.png" alt="微信客服二维码" class="qr-image">
-            <div class="qr-hint">长按识别二维码</div>
-            
+            <div class="qr-hint">长按识别二维码添加</div>
+            <a class="btn-ghost" id="cta-foot" href="#" target="_blank" rel="noopener">立即咨询</a>
         </div>
     </div>
 
-    
+    <!-- ============ 页脚 ============ -->
+    <div class="footer">
+        <div class="slogan">学习助手 · 省心高效 · 值得信赖</div>
+        <p>© 2026 学习助手平台</p>
+    </div>
 
 </div>
 
@@ -408,10 +474,10 @@
 <div class="sticky">
     <div class="sticky-inner">
         <div class="sticky-price">
-            <div class="p">¥18</div>
-            <div class="o">原价 ¥30</div>
+            <div class="p">¥1</div>
+            <div class="o">砍价成功后</div>
         </div>
-        <a class="btn-sticky" id="cta-sticky" href="#" target="_blank" rel="noopener">立即咨询 · 领活动价</a>
+        <a class="btn-sticky" id="cta-sticky" href="#" target="_blank" rel="noopener">立即咨询 · 1 元尝鲜</a>
     </div>
 </div>
 
@@ -422,6 +488,14 @@
         var el = document.getElementById(id);
         if (el) el.href = CONFIG.CTA_URL;
     });
+
+    // ---------- 事实条被删掉时，收窄首屏底部那段留给它压边的空白 ----------
+    // （首屏 padding-bottom 是按"事实条压住下边缘"设计的，事实条一删就会空出一大块）
+    (function () {
+        if (document.querySelector('.facts')) return;
+        var hero = document.querySelector('.hero');
+        if (hero) hero.classList.add('hero--no-facts');
+    })();
 
     // ---------- 社会证明：没有真实数字就不显示（不编造） ----------
     (function () {
