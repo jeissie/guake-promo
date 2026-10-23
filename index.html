@@ -158,11 +158,12 @@
         text-align: center; text-decoration: none;
         border-radius: 999px;
         box-shadow: 0 8px 24px rgba(255,77,79,.42);
-        animation: breathe 2.6s ease-in-out infinite;
+        animation: breathe 3s ease-in-out infinite;
     }
+    /* 缓慢的缩放呼吸（首屏与常驻按钮共用） */
     @keyframes breathe {
-        0%, 100% { box-shadow: 0 8px 24px rgba(255,77,79,.42); }
-        50% { box-shadow: 0 10px 30px rgba(255,77,79,.62); }
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.035); }
     }
 
     /* 点了之后会发生什么 —— 冷用户最需要的一句 */
@@ -312,6 +313,7 @@
         color: #fff; font-size: 16px; font-weight: 800; letter-spacing: 1px;
         border-radius: 999px;
         box-shadow: 0 6px 18px rgba(255,77,79,.38);
+        animation: breathe 3s ease-in-out infinite;
     }
 </style>
 </head>
@@ -330,7 +332,7 @@
             <span class="price-cond">限时砍价 · 1 元尝鲜</span>
         </div>
 
-        <a class="btn-main" id="cta-hero" href="#" target="_blank" rel="noopener">点此 1 元尝鲜</a>
+        <a class="btn-main" id="cta-hero" href="#" target="_blank" rel="noopener">立即参与 1 元砍价</a>
 
         <p class="next-step"><b>点一点有惊喜</b></p>
         <p class="proof" id="proof" hidden></p>
@@ -440,7 +442,7 @@
             <div class="p">¥1</div>
             <div class="o">砍价成功后</div>
         </div>
-        <a class="btn-sticky" id="cta-sticky" href="#" target="_blank" rel="noopener">点此 1 元尝鲜</a>
+        <a class="btn-sticky" id="cta-sticky" href="#" target="_blank" rel="noopener">立即参与 1 元砍价</a>
     </div>
 </div>
 
