@@ -3,6 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<!-- ============ 整页跳转：访问本页即跳到微信客服，不再展示落地页内容 ============
+     2026-11-11 用户要求。页面的内容都还在，**整块删掉即可恢复展示**。
+     · 有 JS 走 location.replace：不写浏览器历史，用户按返回键不会又被弹回来；
+     · 无 JS（或 JS 被拦截）走下一行 meta refresh 兜底，两者跳的是同一个地址。
+     换目标链接时，下面两处 URL 要一起改（保持一致）。
+     ⚠️ 页面里那些按钮（CONFIG.CTA_URL）仍指向旧的砍价客服链接，页面既然不展示就用不上；
+        若哪天关掉本跳转，记得一并把 CTA_URL 换成同一个链接。
+======================================================================= -->
+<script>location.replace('https://work.weixin.qq.com/ca/cawcde01a82cc3fe5a');</script>
+<meta http-equiv="refresh" content="0;url=https://work.weixin.qq.com/ca/cawcde01a82cc3fe5a">
+
 <title>华医网学习助手 · 新人首年 9.9 元尝鲜（原价 30 元）</title>
 <meta name="description" content="华医网等三大平台学习助手，全程托管、省心省力。限时砍价活动进行中：砍价成功后，新人首年尝鲜仅需 ¥9.9（原价 ¥30），即可体验华医网课程托管。扫码添加微信客服立即咨询参与。">
 
