@@ -6,8 +6,6 @@
 <title>添加客服微信 · 医路相伴</title>
 <meta name="description" content="长按识别二维码，添加客服微信咨询。">
 
-<!-- 百度统计（2026-11-12 加回）：本页不再有整页跳转，会正常停留展示，
-     统计脚本能正常加载并上报（此前把统计放在跳转之后会连加载都发生不了） -->
 <script>
     var _hmt = _hmt || [];
     (function() {
@@ -18,14 +16,7 @@
     })();
 </script>
 <style>
-    /* ==================== 添加客服微信页（index.html；weixin.html 为同内容副本） ====================
-       2026-11-12 新建。仿微信「朋友资料」页：身份区（头像 + 名字 + @企业简称）
-       → 引导语 → 底部居中二维码。整页白底，微信内打开长按识别即可添加。
-       ⚠️ 二维码图片是 qrcode_contact.png（企业微信「联系我」码，396×396）。
-          换码时只替换这张图即可，尺寸不用改。
-       ⚠️ 本页不做跳转、不埋统计；若哪天要跳转/埋点，注意 [[index.html]] 那套整页跳转
-          会吃掉统计上报（见 index.html 顶部注释），别照抄。
-    ======================================================================= */
+
     :root {
         --ink: #191919;
         --muted: #8a8a8a;
@@ -42,7 +33,6 @@
         padding: 0 24px calc(22px + env(safe-area-inset-bottom));
     }
 
-    /* ==================== 身份区：头像 + 名字 + @企业简称 ==================== */
     .identity {
         display: flex; align-items: center; gap: 14px;
         padding: 38px 0 22px;
@@ -56,7 +46,6 @@
     .who .name { font-size: 20px; font-weight: 600; letter-spacing: .2px; }
     .who .sub  { font-size: 13px; color: var(--muted); margin-top: 4px; }
 
-    /* ==================== 引导语 ==================== */
     .guide { padding-top: 4px; }
     .guide h1 { margin: 0; font-size: 22px; line-height: 1.45; font-weight: 600; }
     .guide p  { margin: 10px 0 0; font-size: 14px; line-height: 1.75; color: #555; }
@@ -67,9 +56,6 @@
         border-radius: 999px; padding: 4px 10px;
     }
 
-    /* ==================== 二维码：紧跟平台标签下方、水平居中 ====================
-       2026-11-12 用户要求：原来用 margin-top:auto 把这一块压到屏幕最底部，位置太低，
-       改为直接跟在「华医网 / 陕西继续教育 / 放射考试网」标签下面，只留一点间距。 */
     .qr-block { margin-top: 26px; text-align: center; }
     .qr-block img {
         display: block; margin: 0 auto;
@@ -79,7 +65,6 @@
     .qr-tip b { color: var(--wechat); }
     .qr-note { margin-top: 8px; font-size: 12.5px; color: var(--muted); }
 
-    /* 矮屏（如 iPhone SE）压缩留白，保证二维码完整可见 */
     @media (max-height: 700px) {
         .identity { padding: 22px 0 14px; }
         .guide h1 { font-size: 20px; }
@@ -91,7 +76,6 @@
 </head>
 <body>
 
-    <!-- ============ 身份区（仿微信「朋友资料」页） ============ -->
     <div class="identity">
         <div class="avatar" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="#07c160" stroke-width="1.8"
@@ -105,7 +89,6 @@
         </div>
     </div>
 
-    <!-- ============ 引导语 ============ -->
     <div class="guide">
         <h1>添加客服微信</h1>
         <p>长按下方二维码识别，即可添加客服微信；添加后可直接咨询。</p>
@@ -116,7 +99,6 @@
         </div>
     </div>
 
-    <!-- ============ 二维码（底部居中） ============ -->
     <div class="qr-block">
         <img src="qrcode_contact.png" alt="微信客服二维码" width="396" height="396">
         <div class="qr-tip">长按识别二维码，<b>添加客服微信</b></div>
