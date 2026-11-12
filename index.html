@@ -5,8 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>添加客服微信 · 医路相伴</title>
 <meta name="description" content="长按识别二维码，添加客服微信咨询。">
+
+<!-- 百度统计（2026-11-12 加回）：本页不再有整页跳转，会正常停留展示，
+     统计脚本能正常加载并上报（此前把统计放在跳转之后会连加载都发生不了） -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d10d2567d18411747f910ce76cd0412a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
 <style>
-    /* ==================== 添加客服微信页（weixin.html） ====================
+    /* ==================== 添加客服微信页（index.html；weixin.html 为同内容副本） ====================
        2026-11-12 新建。仿微信「朋友资料」页：身份区（头像 + 名字 + @企业简称）
        → 引导语 → 底部居中二维码。整页白底，微信内打开长按识别即可添加。
        ⚠️ 二维码图片是 qrcode_contact.png（企业微信「联系我」码，396×396）。
