@@ -3,481 +3,111 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-<!-- ============ 整页跳转：访问本页即跳到微信客服，不再展示落地页内容 ============
-     2026-11-11 用户要求。页面的内容都还在，**整块删掉即可恢复展示**。
-     · 有 JS 走 location.replace：不写浏览器历史，用户按返回键不会又被弹回来；
-     · 无 JS（或 JS 被拦截）走下一行 meta refresh 兜底，两者跳的是同一个地址。
-     换目标链接时，下面两处 URL 要一起改（保持一致）。
-     ⚠️ 页面里那些按钮（CONFIG.CTA_URL）仍指向旧的砍价客服链接，页面既然不展示就用不上；
-        若哪天关掉本跳转，记得一并把 CTA_URL 换成同一个链接。
-======================================================================= -->
-<script>location.replace('https://work.weixin.qq.com/ca/cawcde01a82cc3fe5a');</script>
-<meta http-equiv="refresh" content="0;url=https://work.weixin.qq.com/ca/cawcde01a82cc3fe5a">
-
-<title>华医网学习助手 · 新人首年 9.9 元尝鲜（原价 30 元）</title>
-<meta name="description" content="华医网等三大平台学习助手，全程托管、省心省力。限时砍价活动进行中：砍价成功后，新人首年尝鲜仅需 ¥9.9（原价 ¥30），即可体验华医网课程托管。扫码添加微信客服立即咨询参与。">
-
-<!-- 百度统计（沿用原版） -->
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?d10d2567d18411747f910ce76cd0412a";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
-
-<script>
-  var CONFIG = {
-    // 微信客服链接（含砍价活动渠道参数 scene_param=KANJIA_D1，2026-10-22 起）
-    CTA_URL: 'https://work.weixin.qq.com/kfid/kfc1d5055e56a9827e3?enc_scene=ENC24UMZ4NXEQxYy4sbdZWmkwgqPWF2CE1wBzxGUMb4GiUz&scene_param=KANJIA_D1',
-    // 真实已服务人数（如 '1200'）。留空 = 整行不显示。
-    servedCount: '',
-    // 真实合作科室/医院数（如 '30'）。留空 = 不显示。
-    servedDept: ''
-  };
-</script>
-
+<title>添加客服微信 · 医路相伴</title>
+<meta name="description" content="长按识别二维码，添加客服微信咨询。">
 <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
+    /* ==================== 添加客服微信页（weixin.html） ====================
+       2026-11-12 新建。仿微信「朋友资料」页：身份区（头像 + 名字 + @企业简称）
+       → 引导语 → 底部居中二维码。整页白底，微信内打开长按识别即可添加。
+       ⚠️ 二维码图片是 qrcode_contact.png（企业微信「联系我」码，396×396）。
+          换码时只替换这张图即可，尺寸不用改。
+       ⚠️ 本页不做跳转、不埋统计；若哪天要跳转/埋点，注意 [[index.html]] 那套整页跳转
+          会吃掉统计上报（见 index.html 顶部注释），别照抄。
+    ======================================================================= */
     :root {
-        --blue-900: #08203a;
-        --blue-800: #0d4f8c;
-        --blue-600: #1a6fc4;
-        --blue-400: #1a8cff;
-        --ink: #1a3a5c;
-        --muted: #7b8a9c;
-        --bg: #f0f5ff;
-        --hot: #ff4d4f;
-        --hot2: #ff7a3d;
-        --ok: #16a83c;
+        --ink: #191919;
+        --muted: #8a8a8a;
+        --wechat: #07c160;
     }
-
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body { margin: 0; padding: 0; }
     body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-        background: #e6eefb;
-        color: #333;
-        line-height: 1.6;
-        /* 给底部常驻按钮留出空间，避免最后一段内容被压住 */
-        padding-bottom: 88px;
-        padding-bottom: calc(88px + env(safe-area-inset-bottom));
+        background: #fff; color: var(--ink);
+        font: 15px/1.6 -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex; flex-direction: column;
+        padding: 0 24px calc(22px + env(safe-area-inset-bottom));
     }
 
-    .wrap { max-width: 640px; margin: 0 auto; background: var(--bg); min-height: 100vh; position: relative; overflow: hidden; }
+    /* ==================== 身份区：头像 + 名字 + @企业简称 ==================== */
+    .identity {
+        display: flex; align-items: center; gap: 14px;
+        padding: 38px 0 22px;
+    }
+    .avatar {
+        flex: 0 0 auto; width: 58px; height: 58px; border-radius: 15px;
+        background: linear-gradient(145deg, #eafaf1, #d6f3e3);
+        display: flex; align-items: center; justify-content: center;
+    }
+    .avatar svg { width: 30px; height: 30px; display: block; }
+    .who .name { font-size: 20px; font-weight: 600; letter-spacing: .2px; }
+    .who .sub  { font-size: 13px; color: var(--muted); margin-top: 4px; }
 
-    /* ==================== 首屏 ==================== */
-    .hero {
-        background: linear-gradient(150deg, #0a1628 0%, #143a63 45%, #0d4f8c 100%);
-        color: #fff;
-        /* 底部 76px 是留给事实条压住首屏下边的；事实条若被删掉，脚本会给它加 .hero--no-facts 收窄 */
-        padding: 34px 22px 76px;
-        position: relative;
-        overflow: hidden;
-    }
-    .hero--no-facts { padding-bottom: 34px; }
-    .hero::before {
-        content: '';
-        position: absolute; top: -40%; left: -20%; width: 140%; height: 140%;
-        background: radial-gradient(circle at 28% 30%, rgba(26,140,255,.22) 0%, transparent 55%),
-                    radial-gradient(circle at 78% 68%, rgba(255,255,255,.08) 0%, transparent 45%);
-        pointer-events: none;
-    }
-    .hero > * { position: relative; z-index: 1; }
-
-    .eyebrow {
-        display: inline-block;
-        font-size: 12px; letter-spacing: .5px; font-weight: 600;
-        color: #bcd8f5;
-        background: rgba(255,255,255,.12);
-        border: 1px solid rgba(255,255,255,.18);
-        border-radius: 999px;
-        padding: 5px 12px;
-        margin-bottom: 14px;
-    }
-
-    .hero h1 {
-        font-size: 25px; font-weight: 800; line-height: 1.35; letter-spacing: .5px;
-    }
-    .hero h1 em { font-style: normal; color: #ffd86b; }
-
-    .hero .lede {
-        margin-top: 10px; font-size: 14px; color: rgba(255,255,255,.82); line-height: 1.7;
-    }
-
-    /* 价格块：原价（划线）→ 新人首年尝鲜价 → 活动 */
-    .price-row {
-        margin-top: 18px;
-        display: flex; align-items: center; flex-wrap: wrap; gap: 10px;
-        background: rgba(255,255,255,.09);
-        border: 1px solid rgba(255,255,255,.16);
-        border-radius: 16px;
-        padding: 14px 16px;
-    }
-    .price-note { font-size: 13px; color: rgba(255,255,255,.72); }
-    .price-note s { color: rgba(255,255,255,.6); }
-    /* 价格口径说明：尝鲜价的适用范围必须跟价格在一起说清（见文件头 10-27 / 11-03 那两条） */
-    .price-fine {
-        margin-top: 10px; text-align: center;
-        font-size: 12px; color: rgba(255,255,255,.68); line-height: 1.65;
-    }
-    .price-fine b { color: #ffd86b; font-weight: 800; }
-    .price-new { font-size: 34px; font-weight: 900; color: #ffd86b; line-height: 1; }
-    .price-new small { font-size: 14px; font-weight: 700; margin-left: 2px; }
-    .price-cond {
-        font-size: 12px; font-weight: 700; color: #ffd0b0;
-        background: rgba(255,122,61,.18);
-        border: 1px solid rgba(255,122,61,.45);
+    /* ==================== 引导语 ==================== */
+    .guide { padding-top: 4px; }
+    .guide h1 { margin: 0; font-size: 22px; line-height: 1.45; font-weight: 600; }
+    .guide p  { margin: 10px 0 0; font-size: 14px; line-height: 1.75; color: #555; }
+    .plats { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .plats span {
+        font-size: 12px; color: #0d6b3f;
+        background: #f1fbf5; border: 1px solid #cdeedd;
         border-radius: 999px; padding: 4px 10px;
     }
 
-    /* 首屏主按钮 */
-    .btn-main {
-        display: block; width: 100%;
-        margin-top: 18px;
-        padding: 16px 0;
-        background: linear-gradient(135deg, var(--hot) 0%, var(--hot2) 100%);
-        color: #fff; font-size: 17px; font-weight: 800; letter-spacing: 1px;
-        text-align: center; text-decoration: none;
-        border-radius: 999px;
-        box-shadow: 0 8px 24px rgba(255,77,79,.42);
+    /* ==================== 二维码：贴住内容区底部、水平居中 ==================== */
+    .qr-block { margin-top: auto; padding-top: 30px; text-align: center; }
+    .qr-block img {
+        display: block; margin: 0 auto;
+        width: min(68vw, 280px); height: auto;
     }
-    /* 缓慢的缩放呼吸（仅常驻按钮） */
-    @keyframes breathe {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.035); }
-    }
+    .qr-tip { margin-top: 16px; font-size: 15px; font-weight: 600; color: var(--ink); }
+    .qr-tip b { color: var(--wechat); }
+    .qr-note { margin-top: 8px; font-size: 12.5px; color: var(--muted); }
 
-    /* 点了之后会发生什么 —— 冷用户最需要的一句 */
-    .next-step {
-        margin-top: 12px; text-align: center; font-size: 12.5px; color: rgba(255,255,255,.72);
-        line-height: 1.7;
-    }
-    .next-step b { color: #fff; font-weight: 700; }
-
-    /* 社会证明：有真实数字才显示（CONFIG.servedCount 留空则整行隐藏） */
-    .proof {
-        margin-top: 12px; text-align: center; font-size: 12.5px; color: #cfe3f8;
-    }
-    .proof b { color: #ffd86b; font-weight: 800; }
-
-    /* ==================== 事实条（压住首屏底边） ==================== */
-    .facts {
-        display: flex; justify-content: space-around;
-        background: #fff;
-        margin: -58px 18px 0;
-        padding: 16px 8px;
-        border-radius: 16px;
-        box-shadow: 0 6px 24px rgba(13,79,140,.14);
-        position: relative; z-index: 2;
-    }
-    .fact { text-align: center; flex: 1; position: relative; }
-    .fact + .fact::before {
-        content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
-        width: 1px; height: 26px; background: rgba(13,79,140,.1);
-    }
-    .fact .n { font-size: 16px; font-weight: 800; color: var(--blue-800); }
-    .fact .l { font-size: 11px; color: var(--muted); margin-top: 2px; }
-
-    /* ==================== 通用区块 ==================== */
-    .section { padding: 34px 20px 6px; }
-    .h2 { font-size: 19px; font-weight: 800; color: var(--blue-800); text-align: center; }
-    .h2::after {
-        content: ''; display: block; width: 40px; height: 3px; border-radius: 2px;
-        background: linear-gradient(90deg, var(--blue-800), var(--blue-400));
-        margin: 8px auto 0;
-    }
-    /* ==================== 价格卡 ==================== */
-    .plans { margin-top: 18px; display: flex; flex-direction: column; gap: 12px; }
-    .plan {
-        border-radius: 16px; padding: 18px 16px 16px;
-        display: flex; align-items: flex-start; gap: 14px;
-        position: relative; overflow: hidden;
-        border: 1px solid rgba(26,140,255,.14);
-        background: linear-gradient(135deg, #ffffff 0%, #f6fbff 100%);
-        box-shadow: 0 4px 20px rgba(26,140,255,.08);
-    }
-    .plan--hot {
-        background: linear-gradient(135deg, #fff7f3 0%, #ffe9e0 55%, #fff5f0 100%);
-        border: 1px solid rgba(255,77,79,.24);
-        box-shadow: 0 6px 24px rgba(255,77,79,.14);
-        padding-top: 42px;
-    }
-    .plan--hot::before {
-        content: ''; position: absolute; top: 0; left: 0; right: 0; height: 30px;
-        background: linear-gradient(90deg, var(--hot), var(--hot2));
-    }
-    .plan-ribbon {
-        position: absolute; top: 0; left: 0; right: 0; height: 30px;
-        display: flex; align-items: center; justify-content: center; gap: 6px;
-        color: #fff; font-size: 12.5px; font-weight: 800; letter-spacing: .5px;
-    }
-    /* 横幅里的「砍」字圆标 */
-    .plan-ribbon .ribbon-badge {
-        display: inline-flex; align-items: center; justify-content: center;
-        width: 18px; height: 18px; border-radius: 50%;
-        background: rgba(255,255,255,.25);
-        font-size: 11px; font-weight: 800;
-        animation: dropBounce 1.2s ease-in-out infinite;
-    }
-    @keyframes dropBounce {
-        0%, 100% { transform: translateY(-1px); }
-        50% { transform: translateY(2px); }
-    }
-    .plan-icon {
-        flex: 0 0 auto; width: 50px; height: 50px; border-radius: 14px;
-        background: linear-gradient(145deg, #e5f3ff, #f4faff);
-        display: flex; align-items: center; justify-content: center; font-size: 24px;
-        box-shadow: 0 3px 12px rgba(13,79,140,.1);
-    }
-    .plan--hot .plan-icon { background: linear-gradient(145deg, #ffe1d8, #fff1ec); }
-    .plan-body { flex: 1; min-width: 0; }
-    .plan-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-    .plan-name { font-size: 15px; font-weight: 800; color: var(--ink); }
-    .plan-price {
-        flex-shrink: 0; border-radius: 999px; padding: 4px 11px;
-        font-size: 13px; font-weight: 800; color: #fff;
-        background: linear-gradient(135deg, #0d4f8c, #1a6fc4);
-        text-decoration: none;
-    }
-    .plan--hot .plan-price {
-        background: linear-gradient(135deg, var(--hot), var(--hot2));
-        display: inline-flex; flex-direction: column; align-items: center; gap: 1px;
-        line-height: 1.25; text-align: center;
-    }
-    .plan-price .now { font-size: 15px; }
-    /* 划线原价：跟在新人首年价下面一起显示，避免只看到 ¥9.9 */
-    .plan-price .was { font-size: 10px; font-weight: 600; opacity: .82; text-decoration: line-through; }
-    .plan-why { font-size: 12.5px; color: #5a6a80; margin-top: 6px; }
-    .plan-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
-    .plan-tag {
-        font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px;
-        color: var(--ok); background: rgba(22,168,60,.08); border: 1px solid rgba(22,168,60,.2);
-    }
-    .plan-tag--hot { color: var(--hot); background: rgba(255,77,79,.1); border-color: rgba(255,77,79,.28); }
-
-    /* ==================== 常见疑虑 ==================== */
-    .faq { margin-top: 18px; display: flex; flex-direction: column; gap: 10px; }
-    .qa { background: #fff; border-radius: 14px; padding: 14px 16px; box-shadow: 0 3px 16px rgba(13,79,140,.05); }
-    .qa .q { font-size: 14px; font-weight: 700; color: var(--ink); display: flex; gap: 8px; }
-    .qa .q i { font-style: normal; color: var(--blue-400); font-weight: 800; flex-shrink: 0; }
-    .qa .a { font-size: 13px; color: #666; margin-top: 6px; padding-left: 18px; line-height: 1.7; }
-    .qa .a b { color: #d14022; }
-
-    /* ==================== 联系区 ==================== */
-    .contact { padding: 34px 20px 26px; }
-    .contact-card {
-        background: linear-gradient(135deg, #f0f5ff, #e8f0fe);
-        border-radius: 20px; padding: 26px 20px; text-align: center;
-        border: 1px solid rgba(13,79,140,.1);
-    }
-    .contact-card .t { font-size: 17px; font-weight: 800; color: var(--ink); }
-    .contact-card .d { font-size: 13px; color: #888; margin-top: 6px; }
-    .qr-image {
-        width: 178px; height: 178px; border-radius: 12px; display: block;
-        margin: 18px auto 12px; border: 3px solid #fff;
-        box-shadow: 0 4px 16px rgba(13,79,140,.15);
-    }
-    .qr-hint { font-size: 12px; color: var(--blue-800); font-weight: 600; }
-    /* ==================== 常驻底部按钮 ==================== */
-    .sticky {
-        position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
-        background: rgba(255,255,255,.96);
-        backdrop-filter: blur(10px);
-        border-top: 1px solid rgba(13,79,140,.1);
-        box-shadow: 0 -4px 20px rgba(13,79,140,.1);
-        padding: 10px 16px;
-        padding-bottom: calc(10px + env(safe-area-inset-bottom));
-    }
-    .sticky-inner {
-        max-width: 640px; margin: 0 auto;
-        display: flex; align-items: center; gap: 12px;
-    }
-    .sticky-price { flex: 0 0 auto; line-height: 1.15; }
-    .sticky-price .p { font-size: 20px; font-weight: 900; color: var(--hot); }
-    .sticky-price .o { font-size: 11px; color: var(--muted); }
-    .btn-sticky {
-        flex: 1; padding: 13px 0; text-align: center; text-decoration: none;
-        background: linear-gradient(135deg, var(--hot), var(--hot2));
-        color: #fff; font-size: 16px; font-weight: 800; letter-spacing: 1px;
-        border-radius: 999px;
-        box-shadow: 0 6px 18px rgba(255,77,79,.38);
-        animation: breathe 2s ease-in-out infinite;
+    /* 矮屏（如 iPhone SE）压缩留白，保证二维码完整可见 */
+    @media (max-height: 700px) {
+        .identity { padding: 22px 0 14px; }
+        .guide h1 { font-size: 20px; }
+        .qr-block { padding-top: 18px; }
+        .qr-block img { width: min(58vw, 220px); }
+        .qr-tip { margin-top: 12px; }
     }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-    <!-- ============ 首屏：3 秒讲完 + 一个按钮 ============ -->
-    <div class="hero">
-        <span class="eyebrow">华医网 · 陕西继续教育 · 放射考试网</span>
-        <h1>华医网的学习和考试<br><em>交给我们就行</em></h1>
-        <p class="lede">临床太忙、没时间学习？我们全程协助，助您高效完成视频课程与考试，学分按时到手。</p>
-
-        <div class="price-row">
-            <span class="price-note">原价 <s>¥30</s></span>
-            <span class="price-new">¥9.9<small>新人首年</small></span>
-            <span class="price-cond">限时砍价</span>
+    <!-- ============ 身份区（仿微信「朋友资料」页） ============ -->
+    <div class="identity">
+        <div class="avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#07c160" stroke-width="1.8"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 11.6a8.4 8.4 0 0 1-8.6 8.3 9.4 9.4 0 0 1-2.9-.5L4 21l1.6-4.2A8.2 8.2 0 0 1 4 11.6A8.4 8.4 0 0 1 12.6 3.3 8.4 8.4 0 0 1 21 11.6z"/>
+            </svg>
         </div>
-
-        <a class="btn-main" id="cta-hero" href="#" target="_blank" rel="noopener">立即参与 · 新人首年 9.9 元</a>
-
-        <p class="price-fine">9.9 元为<b>新人首年尝鲜价</b>（原价 ¥30），限时砍价成功后享受</p>
-        <p class="next-step"><b>点一点有惊喜</b></p>
-        <p class="proof" id="proof" hidden></p>
-    </div>
-
-    <!-- ============ 三条可核实的事实（替代原版"95%+ 解析准确率"） ============ -->
-    <div class="facts">
-        <div class="fact"><div class="n">3 大平台</div><div class="l">一个客服全搞定</div></div>
-        <div class="fact"><div class="n">限时砍价</div><div class="l">新人首年 9.9 元</div></div>
-        <div class="fact"><div class="n">全程托管</div><div class="l">不用自己刷课</div></div>
-    </div>
-
-    <!-- ============ 三大平台（沿用原版信息） ============ -->
-    <div class="section">
-        <div class="h2">三大平台学习助手</div>
-
-        <div class="plans">
-            <div class="plan plan--hot">
-                <div class="plan-ribbon"><span class="ribbon-badge">砍</span><span>限时砍价 · 新人首年 9.9 元</span></div>
-                <div class="plan-icon">🏥</div>
-                <div class="plan-body">
-                    <div class="plan-head">
-                        <span class="plan-name">华医网</span>
-                        <a class="plan-price" id="cta-plan" href="#" target="_blank" rel="noopener">
-                            <span class="now">新人首年 ¥9.9</span>
-                            <span class="was">原价 ¥30</span>
-                        </a>
-                    </div>
-                    <div class="plan-why">临床太忙，没有时间刷课</div>
-                    <div class="plan-tags">
-                        <span class="plan-tag plan-tag--hot">限时砍价</span>
-                        <span class="plan-tag">省心高效</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="plan">
-                <div class="plan-icon">📖</div>
-                <div class="plan-body">
-                    <div class="plan-head">
-                        <span class="plan-name">陕西继续教育</span>
-                        <span class="plan-price">¥20/人</span>
-                    </div>
-                    <div class="plan-why">学分要求多，总是为凑不够发愁</div>
-                    <div class="plan-tags">
-                        <span class="plan-tag">省心高效</span>
-                        <span class="plan-tag">快速完成</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="plan">
-                <div class="plan-icon">☢️</div>
-                <div class="plan-body">
-                    <div class="plan-head">
-                        <span class="plan-name">放射考试网</span>
-                        <span class="plan-price">¥50/人</span>
-                    </div>
-                    <div class="plan-why">放射考试多，通过率低压力大</div>
-                    <div class="plan-tags">
-                        <span class="plan-tag">省心高效</span>
-                        <span class="plan-tag">快速完成</span>
-                    </div>
-                </div>
-            </div>
+        <div class="who">
+            <div class="name">医路相伴</div>
+            <div class="sub">@信彼南 · 人工客服</div>
         </div>
     </div>
 
-    <!-- ============ 常见疑虑（冷用户真正卡住的几个问题） ============ -->
-    <div class="section">
-        <div class="h2">你可能想问</div>
-        <div class="faq">
-            <div class="qa">
-                <div class="q"><i>Q</i>「新人首年 9.9 元」怎么参与？活动多久？</div>
-                <div class="a">华医网限时砍价活动：砍价成功后，<b>新人首年尝鲜仅需 ¥9.9</b>（原价 <s>¥30</s>）活动限时进行，点击下方按钮，立即参与！</div>
-            </div>
-            <div class="qa">
-                <div class="q"><i>Q</i>不放心怎么办？</div>
-                <div class="a">付款后、尚未开始服务前，可随时联系客服退款；对服务内容有疑问也可以先问清楚再决定。</div>
-            </div>
-            <div class="qa">
-                <div class="q"><i>Q</i>我的信息会不会外泄？</div>
-                <div class="a">学习账号信息仅用于完成你在对应平台的课程与考试，不作他用。</div>
-            </div>
-            <div class="qa">
-                <div class="q"><i>Q</i>课程什么时候完成？</div>
-                <div class="a">按各平台进度安排推进，客服会同步进度；期间任何疑问随时问客服。</div>
-            </div>
+    <!-- ============ 引导语 ============ -->
+    <div class="guide">
+        <h1>添加客服微信</h1>
+        <p>长按下方二维码识别，即可添加客服微信；添加后可直接咨询。</p>
+        <div class="plats">
+            <span>华医网</span>
+            <span>陕西继续教育</span>
+            <span>放射考试网</span>
         </div>
     </div>
 
-    <!-- ============ 联系区（扫码添加人工客服） ============ -->
-    <div class="contact">
-        <div class="contact-card">
-            <div class="t">不清楚？扫码添加人工客服</div>
-            <div class="d">扫码咨询 · 限时砍价，新人首年 9.9 元</div>
-            <img src="qrcode_ella.png" alt="微信客服二维码" class="qr-image">
-            <div class="qr-hint">长按识别二维码添加</div>
-        </div>
+    <!-- ============ 二维码（底部居中） ============ -->
+    <div class="qr-block">
+        <img src="qrcode_contact.png" alt="微信客服二维码" width="396" height="396">
+        <div class="qr-tip">长按识别二维码，<b>添加客服微信</b></div>
+        <div class="qr-note">也可截图后用微信「扫一扫」从相册识别</div>
     </div>
-
-    <!-- 页脚已移除（用户 2026-10-22 要求），联系区之后直接结束 -->
-
-</div>
-
-<!-- 常驻底部按钮：v1 的按钮在最底部，滚到哪儿都得往下拉；这条让"咨询"永远在手指边 -->
-<div class="sticky">
-    <div class="sticky-inner">
-        <div class="sticky-price">
-            <div class="p">新人首年 ¥9.9</div>
-            <div class="o">原价 ¥30 · 限时砍价</div>
-        </div>
-        <a class="btn-sticky" id="cta-sticky" href="#" target="_blank" rel="noopener">立即参与砍价</a>
-    </div>
-</div>
-
-<script>
-    // ---------- 各 CTA 统一从 CONFIG 取链接，避免以后改链接漏改 ----------
-    // 每个入口都做了存在性判断：将来删掉某个按钮不会抛错（只是少一个入口）。
-    ['cta-hero', 'cta-foot', 'cta-plan', 'cta-sticky'].forEach(function (id) {
-        var el = document.getElementById(id);
-        if (el) el.href = CONFIG.CTA_URL;
-    });
-
-    // ---------- 事实条被删掉时，收窄首屏底部那段留给它压边的空白 ----------
-    // （首屏 padding-bottom 是按"事实条压住下边缘"设计的，事实条一删就会空出一大块）
-    (function () {
-        if (document.querySelector('.facts')) return;
-        var hero = document.querySelector('.hero');
-        if (hero) hero.classList.add('hero--no-facts');
-    })();
-
-    // ---------- 社会证明：没有真实数字就不显示（不编造） ----------
-    (function () {
-        var box = document.getElementById('proof');
-        if (!box) return;
-        var parts = [];
-        if (CONFIG.servedCount) parts.push('已服务 <b>' + CONFIG.servedCount + '</b> 位医护人员');
-        if (CONFIG.servedDept) parts.push('<b>' + CONFIG.servedDept + '</b> 个科室正在使用');
-        if (!parts.length) return;
-        box.innerHTML = parts.join(' · ');
-        box.hidden = false;
-    })();
-
-    // ---------- 绕过 CDN 缓存：每次访问给二维码追加时间戳（沿用 v1 做法） ----------
-    (function () {
-        var t = Date.now();
-        document.querySelectorAll('img[src*="qrcode"]').forEach(function (img) {
-            img.src = img.src.split('?')[0] + '?v=' + t;
-        });
-    })();
-</script>
 
 </body>
 </html>
