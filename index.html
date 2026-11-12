@@ -67,8 +67,10 @@
         border-radius: 999px; padding: 4px 10px;
     }
 
-    /* ==================== 二维码：贴住内容区底部、水平居中 ==================== */
-    .qr-block { margin-top: auto; padding-top: 30px; text-align: center; }
+    /* ==================== 二维码：紧跟平台标签下方、水平居中 ====================
+       2026-11-12 用户要求：原来用 margin-top:auto 把这一块压到屏幕最底部，位置太低，
+       改为直接跟在「华医网 / 陕西继续教育 / 放射考试网」标签下面，只留一点间距。 */
+    .qr-block { margin-top: 26px; text-align: center; }
     .qr-block img {
         display: block; margin: 0 auto;
         width: min(68vw, 280px); height: auto;
@@ -81,7 +83,7 @@
     @media (max-height: 700px) {
         .identity { padding: 22px 0 14px; }
         .guide h1 { font-size: 20px; }
-        .qr-block { padding-top: 18px; }
+        .qr-block { margin-top: 16px; }
         .qr-block img { width: min(58vw, 220px); }
         .qr-tip { margin-top: 12px; }
     }
